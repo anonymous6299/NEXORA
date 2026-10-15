@@ -31,7 +31,7 @@ Configure your FreeNewsAPI and OpenRouter API keys before running the applicatio
 - **College:** ADGIPS (aff. with GGSIPU)
 
 ## Future Scope
-Reading analytics, timed reading challenges, leaderboards, and a personalized dashboard.
+Reading analytics, timed reading challenges, leaderboards and a personalized dashboard.
 
 ---
 
