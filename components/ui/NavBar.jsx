@@ -7,14 +7,12 @@ const NavLink = ({to,label}) => {
     // hooks init
     const loc = useLocation();
 
+    // component
     return <Link to={to}><p className={`transition border-b-2 px-3 pb-1 ${loc.pathname===to?"text-black border-black":"text-gray-400 hover:text-gray-700 border-transparent"}`}>{label}</p></Link>
 }
 
 // component
 const NavBar = () => {
-    // common class name of nav links
-    const commonClass = "";
-
     // navlinks array
     const navlinks = ["home", "saved", "about", "contact"];
 
