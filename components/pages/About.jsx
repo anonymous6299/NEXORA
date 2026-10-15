@@ -13,7 +13,7 @@ const AboutSection = () => {
     {/* about the project */}
     <div>
       {/* small desc */}
-      <p className="text-xs uppercase tracking-widest text-gray-400 mb-4">About the project</p>
+      <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4 font-semibold">About the project</p>
       {/* main text */}
       <p className="font-display text-3xl font-semibold leading-tight mb-6">Built as a university minor project</p>
 
@@ -33,7 +33,7 @@ const AboutSection = () => {
     {/* project focus */}
     <div className="w-full">
       {/* small desc */}
-      <p className="text-xs uppercase tracking-widest text-gray-400 mb-4">project focus</p>
+      <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4 font-semibold">project focus</p>
 
       {/* points */}
       <div>
@@ -65,7 +65,7 @@ const AcadProfile = () => {
   return (
     <div className="my-16">
       {/* small desc */}
-      <p className="text-xs uppercase tracking-widest text-gray-400 mb-4">academic profile</p>
+      <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4 font-semibold">academic profile</p>
       {/* main text */}
       <p className="font-display text-3xl font-semibold leading-tight mb-10 border-b pb-5">Student details</p>
 
@@ -95,7 +95,7 @@ const About = () => {
       {/* initial text */}
       <div className="mt-16">
         {/* small desc */}
-        <p className="text-xs uppercase tracking-widest text-gray-400 mb-4">seventh semester minor project</p>
+        <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-4 font-semibold">seventh semester minor project</p>
         {/* main text */}
         <p className="font-display text-6xl font-semibold leading-tight mb-6 w-180">Information should feel considered, not overwhelming.</p>
         {/* sub text */}
