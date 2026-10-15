@@ -26,10 +26,10 @@ const NavBar = () => {
             <Link to={"/"}><p className="uppercase text-xl brand font-bold font-display">nexora</p></Link>
             
             {/* navlinks */}
-            <div className="flex justify-between items-center capitalize text-sm">
+            <div className="flex justify-between items-center capitalize text-sm space-x-5">
                 {
                     navlinks.map((ele, pos) => {
-                        return <NavLink to={pos>0?`/${ele}`:"/"} key={pos} label={pos<=1?ele:`${ele} us`}/>
+                        return <NavLink to={pos>0?`/${ele}`:"/"} key={pos} label={ele}/>
                     })
                 }
             </div>
