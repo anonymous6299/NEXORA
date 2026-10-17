@@ -1,5 +1,6 @@
 // imports
 import { D_Val } from "../../data"
+import SVG from "./SVG";
 
 
 // news card
@@ -10,7 +11,14 @@ const NewsCard = ({ icons, news, isLast, size }) => {
         "text-gray-500 text-sm"
     ]
 
-    const sANDxs=size === "s" || size === "xs";
+    // condition for size being small or very small 
+    const sANDxs = size === "s" || size === "xs";
+
+    // common svg props
+    const props = {
+        SVGOthers: { fill: "#99a1af" },
+        PathOthers: { strokeLinecap: "round", strokeLinejoin: "round" }
+    }
 
     return (
         <div className={`flex items-start ${isLast || sANDxs ? "" : "border-b border-gray-200"} pb-5 space-x-5 cursor-pointer ${sANDxs ? "mb-0" : "mb-7"}`}>
@@ -44,9 +52,12 @@ const NewsCard = ({ icons, news, isLast, size }) => {
                     <div className={`flex justify-between items-center space-x-3 ${!icons ? "hidden" : ""}`}>
                         {
                             news.actions.map((news, pos) => {
-                                return <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#99a1af" className="size-5" key={pos}>
-                                    <path fillRule="evenodd" d={D_Val[news]} clipRule="evenodd" />
-                                </svg>
+                                return <SVG
+                                    d={D_Val[news]}
+                                    className="size-5"
+                                    {...props}
+                                    key={pos}
+                                />
                             })
                         }
                     </div>
@@ -55,5 +66,6 @@ const NewsCard = ({ icons, news, isLast, size }) => {
         </div>
     )
 }
+
 
 export default NewsCard

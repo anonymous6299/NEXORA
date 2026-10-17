@@ -2,6 +2,7 @@
 import NewsCard from "../ui/NewsCard"
 import { rl_articles, D_Val } from "../../data"
 import NotesCard from "../ui/NotesCard"
+import { Notes_Article_Pgtn } from "../ui/Pagination"
 
 // common part for every section
 const CommonSec = ({ title }) => {
@@ -68,14 +69,7 @@ const NotesSec = () => {
       <CommonSec title={"notes"} />
       {/* articles */}
       <NotesCard/>
-      {/* {rl_articles.map((ele, pos) => {
-        return <NewsCard
-          icons={true}
-          news={ele}
-          isLast={pos + 1 === rl_articles.length}
-          key={pos}
-        />
-      })} */}
+      <Notes_Article_Pgtn />
     </div>
     )
 }
