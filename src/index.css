@@ -18,7 +18,10 @@ body {
   color: #0a0a0a;
 }
 
+input:focus,select:focus {
+  outline: none;
+}
+
 @utility font-display {
   font-family: 'Playfair Display', Georgia, serif;
 }
-

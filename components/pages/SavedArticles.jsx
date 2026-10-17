@@ -1,31 +1,17 @@
 // imports
 import NewsCard from "../ui/NewsCard"
-import { rl_articles, D_Val } from "../../data"
+import { rl_articles } from "../../data"
 import NotesCard from "../ui/NotesCard"
 import { Notes_Article_Pgtn } from "../ui/Pagination"
+import CommonHeader from "../ui/CommonHeader"
 
-// common part for every section
-const CommonSec = ({ title }) => {
-  return (
-    <>
-      {/* top heading and articles */}
-      <div className="flex items-center justify-between">
-        <p className="capitalize font-semibold text-2xl font-display">{title}</p>
-        <p className="text-gray-400 text-sm">2 article(s)</p>
-      </div>
-
-      {/* horizontal sep */}
-      <hr className=" border-b border-gray-200 mt-3 mb-8" />
-    </>
-  )
-}
 
 
 // read later section
 const ReadLater = () => {
   return (
     <div>
-      <CommonSec title={"read later"} />
+      <CommonHeader title={"read later"} />
       {/* articles */}
       {rl_articles.map((ele, pos) => {
         return <NewsCard
@@ -45,7 +31,7 @@ const ReadLater = () => {
 const OfflineSec = () => {
   return (
     <div>
-      <CommonSec title={"available offline"} />
+      <CommonHeader title={"available offline"} />
       {/* articles */}
       {rl_articles.map((ele, pos) => {
         return <NewsCard
@@ -66,7 +52,7 @@ const OfflineSec = () => {
 const NotesSec = () => {
   return (
     <div>
-      <CommonSec title={"notes"} />
+      <CommonHeader title={"notes"} />
       {/* articles */}
       <NotesCard/>
       <Notes_Article_Pgtn />
