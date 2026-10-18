@@ -6,7 +6,6 @@ import SVG from "./SVG";
 // news card
 const NewsCard = ({ icons, news, isLast, size }) => {
     const classname = [
-        "text-xs font-medium text-gray-400 uppercase tracking-widest",
         `font-display text-gray-900 hover:text-gray-600 font-semibold ${size==="xs"?"":"text-lg"}`,
         "text-gray-500 text-sm"
     ]
@@ -19,20 +18,10 @@ const NewsCard = ({ icons, news, isLast, size }) => {
     }
 
     return (
-        <div className={`flex items-start ${isLast || size==="s" ? "" : "border-b border-gray-200"} pb-5 space-x-5 cursor-pointer ${size==="s" ? "mb-0" : "mb-7"}`}>
-            {/* image */}
-            <div className={"w-full aspect-3/2 overflow-hidden"} style={{ maxWidth: size === "s" ? "7.5rem" : size === "xs" ? "7rem" : "12rem" }}>
-                <img
-                    src={news.image}
-                    alt="img"
-                    className="w-full h-full object-cover hover:scale-[1.02] transition-transform"
-                />
-            </div>
-            {/* right side content */}
-            <div className="space-y-2.5">
-                {/* category, title and summary */}
+        <div className={`space-y-2.5  pb-5 cursor-pointer ${isLast || size==="s" ? "" : "border-b border-gray-200"} ${size==="s" ? "mb-0" : "mb-7"}`}>
+                {/* category, title and description */}
                 {
-                    [news.category, news.title, size==="s" || size==="xs" ? null : news.summary].map((val, pos) => {
+                    [news.title, size==="s" || size==="xs" ? null : news.summary].map((val, pos) => {
                         return <p className={classname[pos]} key={pos}>{val}</p>
                     })
                 }
@@ -61,7 +50,6 @@ const NewsCard = ({ icons, news, isLast, size }) => {
 
                     </div>
                 </div>
-            </div>
         </div>
     )
 }
