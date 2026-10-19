@@ -2,6 +2,7 @@ import { rl_articles } from "../../data"
 import CommonHeader from "../ui/CommonHeader"
 import HomeHeader from "../ui/HomeHeader"
 import NewsCard from "../ui/NewsCard"
+import {NewsCardLoading, NewsError, RecommendationError} from "../ui/NewsLoadErr"
 import { Notes_Article_Pgtn } from "../ui/Pagination"
 import SVG from "../ui/SVG"
 
@@ -13,7 +14,7 @@ import SVG from "../ui/SVG"
 const LatestNews = () => {
     return (
         <div className="w-full">
-            <CommonHeader
+            {/* <CommonHeader
                 title={"latest news"}
                 hr={false}
             />
@@ -27,7 +28,9 @@ const LatestNews = () => {
                         />
                     })
                 }
-            </div>
+            </div> */}
+            {/* <NewsCardLoading n={4}/> */}
+            <NewsError/>
         </div>
     )
 }
@@ -41,7 +44,7 @@ const LatestNews = () => {
 const RecommendedNews = () => {
     return (
         <div className="w-1/2">
-            <CommonHeader
+            {/* <CommonHeader
                 title={"recommended"}
                 articles={false}
             />
@@ -57,7 +60,9 @@ const RecommendedNews = () => {
                         />
                     })
                 }
-            </div>
+            </div> */}
+            {/* <NewsCardLoading n={4}/> */}
+            <RecommendationError/>
         </div>
     )
 }

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import SVG from '../ui/SVG'
 import AISummary from '../ui/AISummary'
+import ArticleLoading from '../ui/ArticleLoading'
 
 // svg props
 const props = {
@@ -135,10 +136,11 @@ const Article = () => {
     return (
         <div className="flex items-start px-40 my-10 justify-between">
             {/* news content on left */}
-            <NewsContent />
+            {/* <NewsContent /> */}
 
             {/* notes on right */}
-            <NotesSection />
+            {/* <NotesSection /> */}
+            <ArticleLoading/>
         </div>
     )
 }
