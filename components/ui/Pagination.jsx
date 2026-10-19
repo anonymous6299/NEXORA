@@ -2,8 +2,8 @@
 
 import SVG from "./SVG"
 
-// pagination for notes section in saved pages
-const Notes_Article_Pgtn = () => {
+// pagination
+const Pagination = ({ Pg_Type }) => {
     // common props
     const props = {
         SVGOthers: {
@@ -30,8 +30,11 @@ const Notes_Article_Pgtn = () => {
                 />
             </button>
 
-            {/* description text */}
-            <p className="text-sm text-gray-500">Article 1 of n</p>
+            {/* description text or page numbers */}
+            {Pg_Type === "notes" ? <p className="text-sm text-gray-500">Article 1 of n</p> : Array.from({ length: 3 }).map((ele, pos) => {
+                return <button className={`${btnClass} ${pos === 0 ? "bg-black text-white" : ""} text-xs px-3 font-bold`} key={pos}>{pos + 1}</button>
+            })}
+
 
             {/* next */}
             <button className={btnClass}>
@@ -45,7 +48,10 @@ const Notes_Article_Pgtn = () => {
     )
 }
 
-export { Notes_Article_Pgtn }
+
+
+
+export default Pagination
 
 
 

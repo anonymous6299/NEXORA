@@ -2,7 +2,7 @@
 import NewsCard from "../ui/NewsCard"
 import { rl_articles } from "../../data"
 import NotesCard from "../ui/NotesCard"
-import { Notes_Article_Pgtn } from "../ui/Pagination"
+import Pagination from "../ui/Pagination"
 import CommonHeader from "../ui/CommonHeader"
 
 
@@ -13,15 +13,16 @@ const ReadLater = () => {
     <div>
       <CommonHeader title={"read later"} />
       {/* articles */}
-      {/* {rl_articles.map((ele, pos) => {
+      {rl_articles.map((ele, pos) => {
         return <NewsCard
           icons={true}
           news={ele}
           isLast={pos + 1 === rl_articles.length}
           key={pos}
         />
-      })} */}
-      <p className="text-sm text-gray-400 py-6">No articles saved for later.</p>
+      })}
+      {/* <p className="text-sm text-gray-400 py-6">No articles saved for later.</p> */}
+      <Pagination/>
     </div>
     )
   // 
@@ -34,15 +35,16 @@ const OfflineSec = () => {
     <div>
       <CommonHeader title={"available offline"} />
       {/* articles */}
-      {/* {rl_articles.map((ele, pos) => {
+      {rl_articles.map((ele, pos) => {
         return <NewsCard
           icons={false}
           news={ele}
           isLast={pos + 1 === rl_articles.length}
           key={pos}
         />
-      })} */}
-      <p className="text-sm text-gray-400 py-6">No articles saved for offline access.</p>
+      })}
+      <Pagination/>
+      {/* <p className="text-sm text-gray-400 py-6">No articles saved for offline access.</p> */}
     </div>
     )
   // 
@@ -56,9 +58,9 @@ const NotesSec = () => {
     <div>
       <CommonHeader title={"notes"} />
       {/* articles */}
-      {/* <NotesCard/>
-      <Notes_Article_Pgtn /> */}
-      <p className="text-sm text-gray-400 py-6">No notes yet. Open any article to add notes.</p>
+      <NotesCard/>
+      <Pagination Pg_Type={"notes"}/>
+      {/* <p className="text-sm text-gray-400 py-6">No notes yet. Open any article to add notes.</p> */}
     </div>
     )
 }

@@ -3,6 +3,7 @@ import { useState } from 'react'
 import SVG from '../ui/SVG'
 import AISummary from '../ui/AISummary'
 import ArticleLoading from '../ui/ArticleLoading'
+import {NewsError} from '../ui/NewsLoadErr'
 
 // svg props
 const props = {
@@ -115,13 +116,13 @@ const NotesSection = () => {
                 name="note" 
                 id="note" 
                 rows={3} 
-                className='w-full focus:outline-none resize-none text-sm px-3 py-2.5 border border-transparent focus:border-gray-300 transition-all h-full' 
+                className='w-full focus:outline-none resize-none text-sm px-3 py-2.5 border border-transparent focus:border-gray-300 transition-all h-full placeholder:text-gray-400/80' 
                 placeholder='Add a note...' 
                 value={Note} 
                 onChange={(e)=>{setNote(e.target.value)}}>
                 </textarea>
 
-                <div className='flex justify-between items-center bg-gray-100 px-3 py-2'>
+                <div className='flex justify-between items-center bg-gray-100/80 px-3 py-2'>
                     <p className='text-xs text-gray-400'>x remaining</p>
                     <button className='bg-black disabled:opacity-30 text-white capitalize px-3 py-1.5 text-xs cursor-pointer disabled:cursor-not-allowed' disabled={Note===""}>save</button>
                 </div>
@@ -136,11 +137,12 @@ const Article = () => {
     return (
         <div className="flex items-start px-40 my-10 justify-between">
             {/* news content on left */}
-            {/* <NewsContent /> */}
+            <NewsContent />
 
             {/* notes on right */}
-            {/* <NotesSection /> */}
-            <ArticleLoading/>
+            <NotesSection />
+            {/* <ArticleLoading/> */}
+            {/* <NewsError /> */}
         </div>
     )
 }

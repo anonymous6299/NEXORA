@@ -72,14 +72,14 @@ const HomeHeader = () => {
 
             {/* language and country on right side*/}
             <div className="flex justify-between items-start space-x-5">
-                <select name="language" id="language" autoComplete="off" className=" border border-gray-200 focus:border-gray-400 px-2.5 py-1.5 text-sm">
+                <select name="language" id="language" autoComplete="off" className=" border border-gray-200 focus:border-gray-400 px-2.5 py-1.5 text-sm cursor-pointer">
                     {
                         languages.map((ele, pos) => {
                             return <option value={pos} key={pos}>{ele}</option>
                         })
                     }
                 </select>
-                <select name="country" id="country" autoComplete="off" className=" border border-gray-200 focus:border-gray-400 px-2.5 py-1.5 text-sm">
+                <select name="country" id="country" autoComplete="off" className=" border border-gray-200 focus:border-gray-400 px-2.5 py-1.5 text-sm cursor-pointer">
                     {
                         countries.map((ele, pos) => {
                             return <option value={pos} key={pos}>{ele}</option>
