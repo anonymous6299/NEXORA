@@ -73,7 +73,7 @@ const AcadProfile = () => {
       <div className="grid grid-cols-3 grid-rows-3 border-t border-l border-gray-200">
         {
           data.map((ele, pos) => {
-            return <div className="border-r border-b border-gray-200 p-5">
+            return <div className="border-r border-b border-gray-200 p-5" key={pos}>
               <p className="text-xs text-gray-400 uppercase tracking-wider mb-3">{Object.keys(ele)}</p>
               <p className="text-base font-medium text-gray-900">{ele[Object.keys(ele)]}</p>
             </div>

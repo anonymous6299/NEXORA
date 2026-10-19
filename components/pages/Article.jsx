@@ -1,6 +1,7 @@
 // imports
 import { useState } from 'react'
 import SVG from '../ui/SVG'
+import AISummary from '../ui/AISummary'
 
 // svg props
 const props = {
@@ -26,6 +27,7 @@ const NewsContent = () => {
         "A parallel technical committee will convene quarterly to update safety benchmarks as the technology evolves — a recognition that static regulations cannot keep pace with rapid model development."
     ]
 
+    // svg d values
     const dvaleus = ["M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z", "M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3", "M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"]
 
 
@@ -63,6 +65,7 @@ const NewsContent = () => {
             {/* image and content */}
             <div>
                 <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&h=500&fit=crop&auto=format" alt="image" />
+                <AISummary/>
                 <div className="text-justify space-y-7 my-10 text-gray-700">
                     {
                         content.map((ele, pos) => {
@@ -81,6 +84,8 @@ const NotesSection = () => {
     // states
     const [Note, setNote] = useState("");
     const [DeleteNoteDisplay, setDeleteNoteDisplay] = useState(false);
+
+
     return (
         <div className='border border-gray-100 p-5 space-y-4'>
             {/* heading and count*/}
@@ -91,7 +96,10 @@ const NotesSection = () => {
 
 
             {/* notes */}
-            <div className='bg-gray-100 border border-gray-100 p-3 space-y-3 w-76' onMouseEnter={()=>{setDeleteNoteDisplay(true)}} onMouseLeave={()=>{setDeleteNoteDisplay(false)}}>
+            <div 
+            className='bg-gray-100 border border-gray-100 p-3 space-y-3 w-76' 
+            onMouseEnter={()=>{setDeleteNoteDisplay(true)}} 
+            onMouseLeave={()=>{setDeleteNoteDisplay(false)}}>
                 <p className='text-sm text-gray-800'>Interesting: monitoring body gets actual enforcement authority, not just advisory.</p>
                 <div className="flex justify-between items-center">
                     <p className='text-xs text-gray-400'>September 1, 2026</p>
@@ -102,7 +110,16 @@ const NotesSection = () => {
 
             {/* note input */}
             <div className='border border-gray-200 flex flex-col' >
-                <textarea name="note" id="note" rows={3} className='w-full focus:outline-none resize-none text-sm px-3 py-2.5 border border-transparent focus:border-gray-300 transition-all h-full' placeholder='Add a note...' value={Note} onChange={(e)=>{setNote(e.target.value)}}></textarea>
+                <textarea 
+                name="note" 
+                id="note" 
+                rows={3} 
+                className='w-full focus:outline-none resize-none text-sm px-3 py-2.5 border border-transparent focus:border-gray-300 transition-all h-full' 
+                placeholder='Add a note...' 
+                value={Note} 
+                onChange={(e)=>{setNote(e.target.value)}}>
+                </textarea>
+
                 <div className='flex justify-between items-center bg-gray-100 px-3 py-2'>
                     <p className='text-xs text-gray-400'>x remaining</p>
                     <button className='bg-black disabled:opacity-30 text-white capitalize px-3 py-1.5 text-xs cursor-pointer disabled:cursor-not-allowed' disabled={Note===""}>save</button>
@@ -119,7 +136,6 @@ const Article = () => {
         <div className="flex items-start px-40 my-10 justify-between">
             {/* news content on left */}
             <NewsContent />
-
 
             {/* notes on right */}
             <NotesSection />
