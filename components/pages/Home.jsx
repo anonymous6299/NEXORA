@@ -1,4 +1,4 @@
-import { rl_articles } from "../../data"
+import { articles, rl_articles } from "../../data"
 import CommonHeader from "../ui/CommonHeader"
 import HomeHeader from "../ui/HomeHeader"
 import NewsCard from "../ui/NewsCard"
@@ -20,11 +20,11 @@ const LatestNews = () => {
             />
             <div className="mt-5">
                 {
-                    rl_articles.map((ele, pos) => {
+                    articles.data.map((ele, pos) => {
                         return <NewsCard
                             news={ele}
                             key={pos}
-                            isLast={pos + 1 === rl_articles.length}
+                            isLast={pos + 1 === articles.data.length}
                             icons={true}
                         />
                     })
@@ -51,7 +51,7 @@ const RecommendedNews = () => {
             />
             <div className="mt-5">
                 {
-                    rl_articles.map((ele, pos) => {
+                    (rl_articles).map((ele, pos) => {
                         return <NewsCard
                             news={ele}
                             size={"xs"}
