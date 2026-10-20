@@ -9,6 +9,7 @@ import About from '../components/pages/About.jsx';
 import Contact from '../components/pages/Contact.jsx';
 import { createBrowserRouter } from 'react-router';
 import Article from '../components/pages/Article.jsx';
+import ContextState from '../context/ContextState.jsx';
 
 
 const router = createBrowserRouter([
@@ -19,13 +20,15 @@ const router = createBrowserRouter([
       { path: "/saved", element: <SavedArticles /> },
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
-      { path: "/article", element: <Article /> }
+      { path: "/article/:id", element: <Article /> }
     ],
   },
 ]);
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <ContextState>
+      <RouterProvider router={router} />
+    </ContextState>
   </StrictMode>,
 )

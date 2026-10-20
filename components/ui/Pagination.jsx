@@ -1,22 +1,10 @@
-
-
+// imports
 import SVG from "./SVG"
+import DATA from '../../data'
 
 // pagination
 const Pagination = ({ Pg_Type }) => {
-    // common props
-    const props = {
-        SVGOthers: {
-            className: "size-4",
-            strokeWidth: 2,
-            stroke: "currentColor",
-            fill: "none"
-        },
-        PathOthers: {
-            strokeLinecap: "round",
-            strokeLinejoin: "round"
-        }
-    }
+    const classname = "size-4"
 
     const btnClass = "p-1.5 border border-gray-200 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
     return (
@@ -26,7 +14,8 @@ const Pagination = ({ Pg_Type }) => {
             <button className={btnClass}>
                 <SVG
                     d={"M15.75 19.5 8.25 12l7.5-7.5"}
-                    {...props}
+                    {...DATA.SVG_PROPS}
+                    className={classname}
                 />
             </button>
 
@@ -40,7 +29,8 @@ const Pagination = ({ Pg_Type }) => {
             <button className={btnClass}>
                 <SVG
                     d={"m8.25 4.5 7.5 7.5-7.5 7.5"}
-                    {...props}
+                    {...DATA.SVG_PROPS}
+                    className={classname}
                 />
             </button>
 

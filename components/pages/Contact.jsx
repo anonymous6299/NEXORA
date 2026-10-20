@@ -1,33 +1,11 @@
+import DATA from "../../data"
 
 
 
 // component
 const Contact = () => {
 
-  // table data
-  const T_Data = [
-    { "department": "Computer Science & Technology" },
-    { "academic level": "B.Tech · VII Semester" },
-    { "project category": "University Minor Project" },
-    { "response": "Academic enquiries are reviewed by the student project team" }
-  ];
-
-
-  // contact data
-  const C_Data = [
-    {
-      "gmail": "gauravjoshi1456@gmail.com",
-      "description": "Academic and project enquiries"
-    },
-    {
-      "github profile": "github.com/anonymous6299",
-      "description": "Development work and technical profile"
-    },
-    {
-      "source repository": "github.com/anonymous6299/NEXORA",
-      "description": "Project source code and documentation"
-    }
-  ];
+  
   return (
     <div className="my-16 flex justify-between items-start px-40">
 
@@ -47,7 +25,7 @@ const Contact = () => {
         <table className="w-full">
           <tbody>
             {
-              T_Data.map((ele, pos) => {
+              DATA.T_Data.map((ele, pos) => {
                 return <tr key={pos} className="border-b border-gray-200">
                   <td className="text-xs text-gray-400 uppercase tracking-wider w-40 py-4 align-middle">{Object.keys(ele)}</td>
                   <td className="py-4 text-sm to-gray-800">{ele[Object.keys(ele)]}</td>
@@ -72,7 +50,7 @@ const Contact = () => {
 
         {/* data */}
         {
-          C_Data.map((ele,pos)=>{
+          DATA.C_Data.map((ele,pos)=>{
             return <div className="border-b border-gray-200 py-6" key={pos}>
               {console.log(Object.keys(ele))}
           <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">{Object.keys(ele)[0]}</p>

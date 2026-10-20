@@ -1,21 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import SVG from "./SVG";
+import DATA from "../../data";
 
 
 const HomeHeader = () => {
     // dropdown display
     const [DropdownDisplay, setDropdownDisplay] = useState(false);
-
-
-    // common svg props
-    const props = {
-        SVGOthers: { fill: "none", strokeWidth: 1.5, stroke: "currentColor" },
-        PathOthers: { strokeLinecap: "round", strokeLinejoin: "round" }
-    }
-
-    // filter country and language
-    const countries = ["India", "France", "Japan", "Brazil", "Germany"];
-    const languages = ["Hindi", "French", "Japanese", "Portuguese", "German"];
 
     return (
         <div className=" border-b border-gray-100 py-5 mb-5 flex justify-between items-start">
@@ -25,7 +15,7 @@ const HomeHeader = () => {
                     <SVG
                         className={"size-5"}
                         d={"M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 0 1-.659 1.591l-5.432 5.432a2.25 2.25 0 0 0-.659 1.591v2.927a2.25 2.25 0 0 1-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 0 0-.659-1.591L3.659 7.409A2.25 2.25 0 0 1 3 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0 1 12 3Z"}
-                        {...props}
+                        {...DATA.SVG_PROPS}
                     />
                     <p className="text-sm">Filter</p>
                 </button>
@@ -39,7 +29,7 @@ const HomeHeader = () => {
                         <p className="text-xs font-medium uppercase text-gray-500">topic</p>
                         <select name="topic" id="topic" className=" border border-gray-200 focus:border-gray-400 w-full px-2.5 py-1.5 text-sm">
                             {
-                                languages.map((ele, pos) => {
+                                DATA.languages.map((ele, pos) => {
                                     return <option value={pos} key={pos}>{ele}</option>
                                 })
                             }
@@ -74,14 +64,14 @@ const HomeHeader = () => {
             <div className="flex justify-between items-start space-x-5">
                 <select name="language" id="language" autoComplete="off" className=" border border-gray-200 focus:border-gray-400 px-2.5 py-1.5 text-sm cursor-pointer">
                     {
-                        languages.map((ele, pos) => {
+                        DATA.languages.map((ele, pos) => {
                             return <option value={pos} key={pos}>{ele}</option>
                         })
                     }
                 </select>
                 <select name="country" id="country" autoComplete="off" className=" border border-gray-200 focus:border-gray-400 px-2.5 py-1.5 text-sm cursor-pointer">
                     {
-                        countries.map((ele, pos) => {
+                        DATA.countries.map((ele, pos) => {
                             return <option value={pos} key={pos}>{ele}</option>
                         })
                     }

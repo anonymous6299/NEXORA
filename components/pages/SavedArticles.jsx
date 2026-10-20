@@ -1,6 +1,6 @@
 // imports
 import NewsCard from "../ui/NewsCard"
-import { rl_articles } from "../../data"
+import DATA from "../../data"
 import NotesCard from "../ui/NotesCard"
 import Pagination from "../ui/Pagination"
 import CommonHeader from "../ui/CommonHeader"
@@ -13,11 +13,11 @@ const ReadLater = () => {
     <div>
       <CommonHeader title={"read later"} />
       {/* articles */}
-      {rl_articles.map((ele, pos) => {
+      {DATA.rl_articles.map((ele, pos) => {
         return <NewsCard
           icons={true}
           news={ele}
-          isLast={pos + 1 === rl_articles.length}
+          isLast={pos + 1 === DATA.rl_articles.length}
           key={pos}
         />
       })}
@@ -35,11 +35,11 @@ const OfflineSec = () => {
     <div>
       <CommonHeader title={"available offline"} />
       {/* articles */}
-      {rl_articles.map((ele, pos) => {
+      {DATA.rl_articles.map((ele, pos) => {
         return <NewsCard
           icons={false}
           news={ele}
-          isLast={pos + 1 === rl_articles.length}
+          isLast={pos + 1 === DATA.rl_articles.length}
           key={pos}
         />
       })}

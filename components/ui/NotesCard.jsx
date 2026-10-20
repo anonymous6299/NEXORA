@@ -1,4 +1,4 @@
-import { rl_articles } from "../../data"
+import DATA from "../../data"
 import NewsCard from "./NewsCard"
 
 
@@ -6,7 +6,7 @@ const NotesCard = () => {
     return (
         <div className="border border-gray-300/50 hover:border-gray-300 transition-colors p-5 hover:cursor-pointer">
             <NewsCard
-                news={rl_articles[0]}
+                news={DATA.rl_articles[0]}
                 size={"s"}
             />
 
