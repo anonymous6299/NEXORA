@@ -11,33 +11,51 @@ const NewsCard = ({ icons, news, isLast, size }) => {
     const nav = useNavigate();
     return (
         <>
-            <div className={`space-y-2.5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.uuid}`) }}>
+            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.uuid}`) }}>
+                {/* image  */}
+                <div className={"w-full aspect-3/2 overflow-hidden"} style={{ maxWidth: size === "s" ? "7.5rem" : size === "xs" ? "7rem" : "12rem" }}>
+                    <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&h=500&fit=crop&auto=format" alt="image" className="w-fit hover:scale-[1.02] transition-transform duration-300" />
+                </div>
 
-                {/*  title */}
-                <p className={`font-display text-gray-900 hover:text-gray-600 font-semibold ${size === "xs" ? "" : "text-lg"}`}>{news.title}</p>
+                <div className="space-y-1.5 cursor-pointer" >
 
-                {/* bottom section */}
-                <div className="flex justify-between items-center">
+                    {/* topic */}
+                    <p className="uppercase text-xs font-medium tracking-widest text-gray-400">{news.sectionName}</p>
+                    {/*  title */}
+                    <p className={`font-display text-gray-900 hover:text-gray-600 font-semibold ${size === "xs" ? "" : "text-lg"}`}>{news.webTitle}</p>
+                    {/* desc */}
+                    <p className={`text-sm text-gray-500 ${size === "xs" || size === "s" ? "hidden" : ""}`}>{news.fields?.trailText}</p>
+                    {/* bottom section */}
+                    <div className="flex justify-between items-center">
 
-                    {/* source and date */}
-                    <div className={`flex justify-between items-center text-xs space-x-7 ${size === "xs" ? "flex-col space-x-0 items-start space-y-1" : ""}`}>
-                        <p className="text-black/50 font-semibold uppercase tracking-wider">{news.publisher}</p>
-                        <p className="text-gray-400">{news.published_at?.slice(8, 10)} {DATA.MONTHS[Number.parseInt(news.published_at?.slice(5, 7))]} {news.published_at?.slice(0, 4)}</p>
-                    </div>
+                        {/* source and date */}
+                        <div className={`flex justify-between items-center text-xs space-x-7 ${size === "xs" ? "flex-col space-x-0 items-start space-y-1" : ""}`}>
+                            <p className="text-xs text-gray-400">{news.fields?.byline.slice(0,14)} {news.fields?.byline.length>14?"...":""}
+                            </p>
+                            <p className="text-gray-400">
+                                {new Date(news.webPublicationDate).toLocaleDateString("en-IN", {
+                                    timeZone: "Asia/Kolkata",
+                                    day: "numeric",
+                                    month: "long",
+                                    year: "numeric",
+                                })}
+                            </p>
+                        </div>
 
-                    {/* info icons */}
-                    <div className={`flex justify-between items-center text-gray-400 space-x-3 ${!icons ? "hidden" : ""}`}>
-                        {
-                            news.actions.map((ele, pos) => {
-                                return <SVG
-                                    d={DATA.D_Val_Action[ele]}
-                                    className={ele === "download" ? "size-6" : "size-5.5"}
-                                    {...DATA.SVG_PROPS}
-                                    key={pos}
-                                />
-                            })
-                        }
+                        {/* info icons */}
+                        <div className={`flex justify-between items-center text-gray-400 space-x-3 ${!icons ? "hidden" : ""}`}>
+                            {
+                                news.actions.map((ele, pos) => {
+                                    return <SVG
+                                        d={DATA.D_Val_Action[ele]}
+                                        className={ele === "download" ? "size-5.5" : "size-5"}
+                                        {...DATA.SVG_PROPS}
+                                        key={pos}
+                                    />
+                                })
+                            }
 
+                        </div>
                     </div>
                 </div>
             </div>

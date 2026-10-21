@@ -49,6 +49,7 @@ const NewsContent = ({ ARTICLE, DISPLAY }) => {
                 {/* <AISummary /> */}
                 <div className="text-justify space-y-7 my-10 text-gray-700 leading-10">
                     <p>{ARTICLE?.body}</p>
+                        
                 </div>
             </div>
         </div>
@@ -115,9 +116,6 @@ const Article = () => {
     const [ArtIsLoading, setArtIsLoading] = useState(true);
     const [ArtError, setArtError] = useState(false);
 
-    // api key
-    const key = import.meta.env.VITE_API_KEY_NEWS;
-
     // fn to fetch article when this page is opened
     const fetchArticle = async () => {
         try {
@@ -132,6 +130,12 @@ const Article = () => {
         }
     }
 
+    // error retry fn
+    const RetryFn = () => {
+        setArtError(false);
+        fetchArticle()
+    }
+
     useEffect(() => {
         fetchArticle()
     }, [])
@@ -144,7 +148,7 @@ const Article = () => {
             {/* notes on right */}
             <NotesSection DISPLAY={!ArtIsLoading && !ArtError} />
             <ArticleLoading DISPLAY={ArtIsLoading} />
-            <NewsError DISPLAY={ArtError} retry={fetchArticle} />
+            <NewsError DISPLAY={ArtError} retry={RetryFn} />
         </div>
     )
 }

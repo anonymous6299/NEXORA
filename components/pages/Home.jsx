@@ -17,11 +17,11 @@ const LatestNews = () => {
             />
             <div className="mt-5">
                 {
-                    DATA.articles.data.map((ele, pos) => {
+                    DATA.news.response.results.map((ele, pos) => {
                         return <NewsCard
                             news={ele}
                             key={pos}
-                            isLast={pos + 1 === DATA.articles.data.length}
+                            isLast={pos + 1 ===  DATA.news.response.results.length}
                             icons={true}
                         />
                     })
@@ -48,7 +48,7 @@ const RecommendedNews = () => {
             />
             <div className="mt-5">
                 {
-                    (DATA.rl_articles).map((ele, pos) => {
+                    DATA.news.response.results.length!==0?DATA.news.response.results.map((ele, pos) => {
                         return <NewsCard
                             news={ele}
                             size={"xs"}
@@ -56,7 +56,7 @@ const RecommendedNews = () => {
                             key={pos}
                             isLast={pos + 1 === DATA.rl_articles.length}
                         />
-                    })
+                    }):<p className="text-sm text-gray-400">No recommendations found yet.</p>
                 }
             </div>
             {/* <NewsCardLoading n={4}/> */}

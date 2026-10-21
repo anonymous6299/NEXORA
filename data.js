@@ -1,11 +1,5 @@
 
-const initActions = (data) => {
-  const resp = data.map((ele, pos) => {
-    return { ...ele, actions: [] }
-  })
 
-  return resp
-}
 
 const DATA = {
   // svg props
@@ -54,100 +48,208 @@ const DATA = {
     'November',
     'December'
   ],
-  articles: {
-    "data": [
-      {
-        uuid: 'b6893e1d-3aa0-4e8e-a25e-ed0f41fbcbb1',
-        title: 'McDermott keeps unchanged England squad for France',
-        published_at: '2026-10-20T06:31:32.000Z',
-        publisher: 'Oz Arab Media',
-        actions: []
-      },
-      {
-        uuid: 'b560c02e-a166-4419-be58-2a9ca69aea61',
-        title: 'Case registered over ‘defamatory’ remarks against Tamil Nadu CM Vijay',
-        published_at: '2026-10-20T06:19:19.000Z',
-        publisher: 'The Hindu',
-        actions: []
-      },
-      {
-        uuid: 'f85cbb53-70a9-4c03-bef7-26b9865619ba',
-        title: 'The Ustad Bismillah Khan Yuva Puraskar',
-        published_at: '2026-10-20T06:08:35.000Z',
-        publisher: 'INSIGHTS IAS',
-        actions: []
-      },
-      {
-        uuid: '78380943-68ca-4147-9521-b9c62a6fad36',
-        title: "CPI(M) holds night march in Keralam’s Malappuram, seeks Gyanesh Kumar’s resignation over 'denial of voting rights’",
-        published_at: '2026-10-20T06:08:07.000Z',
-        publisher: 'The Hindu',
-        actions: []
-      },
-      {
-        uuid: '4014ebfb-57aa-451e-b778-5a51e63e3c5f',
-        title: 'A2O Lite’s strong start tests whether Lee Soo-man’s K-pop formula still works',
-        published_at: '2026-10-20T06:04:28.000Z',
-        publisher: 'The Korea Herald',
-        actions: []
-      },
-      {
-        uuid: '2800066c-4c24-4c99-917c-0f699f3c5435',
-        title: 'Study explores potential breast cancer benefits of neurokinin receptor antagonists',
-        published_at: '2026-10-20T06:03:00.000Z',
-        publisher: 'News-Medical',
-        actions: []
-      },
-      {
-        uuid: 'c11b80c6-33cb-4f55-9574-5587e7a599dc',
-        title: 'Midfield war! Pedri and Vitinha set for epic ball battle as PSG clash with firing Barca',
-        published_at: '2026-10-20T06:00:06.000Z',
-        publisher: 'Goal.com',
-        actions: []
-      },
-      {
-        uuid: 'd1c1c1df-9402-4080-b2d5-7dd10769a23b',
-        title: 'India’s cultural heritage defines its true identity, says Union Minister Shekhawat',
-        published_at: '2026-10-20T05:57:24.000Z',
-        publisher: 'The New Indian Express',
-        actions: []
-      },
-      {
-        uuid: '99c5f9b0-82ed-4ae0-8a9e-6894a92574bf',
-        title: 'MS Dhoni’s Cheeky Ice Cream Prank On Sakshi Leaves Internet In Awe, Fans Call It His ‘Love Language’ (WATCH)',
-        published_at: '2026-10-20T05:52:31.000Z',
-        publisher: 'Asianet Newsable',
-        actions: []
-      },
-      {
-        uuid: 'fd3a8ca8-84ee-4e12-847b-ba714e064bbf',
-        title: 'Alberta voters reject plan for referendum to leave Canada, CBC projects',
-        published_at: '2026-10-20T05:50:00.000Z',
-        publisher: 'The Guardian',
-        actions: []
-      }
-    ],
-    "meta": {
-      "page_size": 10,
-      "returned": 10,
-      "has_more": true,
-      "order_by": "recent",
-      "filters": {
-        "published_after": null,
-        "published_before": null,
-        "language": "en",
-        "country": "IN",
-        "topic": null,
-        "publisher_uuid": null,
-        "author_uuid": null,
-        "q": null,
-        "in_title": null,
-        "in_body": null,
-        "in_subtitle": null
-      },
-      "offset": 0,
-      "next_offset": 10,
-      "next_cursor": "eyJ2IjoxLCJvcmRlcl9ieSI6InJlY2VudCIsInNpZyI6ImYyZGEyODg5NDQ1ZTdiZTZlMTU1NDgzZmUzZmI4NTA5NjBmZDYwZjU0ZWQ3YTM2NWNjY2M2OTg5ZDliZGZkZWUiLCJsYXN0X3B1Ymxpc2hlZF9hdCI6IjIwMjYtMTAtMjBUMDU6NTA6MDAuMDAwWiIsImxhc3RfaWQiOjM0NjUxOTM1fQ"
+  news: {
+    "response": {
+      "status": "ok",
+      "userTier": "developer",
+      "total": 2698106,
+      "startIndex": 1,
+      "pageSize": 10,
+      "currentPage": 1,
+      "pages": 269811,
+      "orderBy": "newest",
+      "results": [
+        {
+          id: 'sport/live/2026/oct/21/south-africa-v-australia-second-test-day-four-cricket-st-georges-park-gqeberha-live-updates',
+          type: 'liveblog',
+          sectionId: 'sport',
+          sectionName: 'Sport',
+          webPublicationDate: '2026-10-21T11:15:17Z',
+          webTitle: 'South Africa v Australia: second men’s cricket Test, day four – live',
+          webUrl: 'https://www.theguardian.com/sport/live/2026/oct/21/south-africa-v-australia-second-test-day-four-cricket-st-georges-park-gqeberha-live-updates',
+          apiUrl: 'https://content.guardianapis.com/sport/live/2026/oct/21/south-africa-v-australia-second-test-day-four-cricket-st-georges-park-gqeberha-live-updates',
+          fields: {
+            trailText: ' Australia resume their first innings with a mountain to climb against the Proteas in Gqeberha. Join our writers for updates',
+            byline: 'Geoff Lemon (now) and Daniel Gallan (later)',
+            thumbnail: 'https://media.guim.co.uk/be2b2ac1c075468f27cc19af8b5ae01f993e903c/454_0_3335_2668/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/sport',
+          pillarName: 'Sport',
+          actions: []
+        },
+        {
+          id: 'politics/live/2026/oct/21/jackdaw-gasfield-labour-andy-burnham-zack-polanski-uk-politics-latest-news',
+          type: 'liveblog',
+          sectionId: 'politics',
+          sectionName: 'Politics',
+          webPublicationDate: '2026-10-21T11:14:13Z',
+          webTitle: 'Burnham faces Badenoch at PMQs after Jackdaw gasfield approved – UK politics live',
+          webUrl: 'https://www.theguardian.com/politics/live/2026/oct/21/jackdaw-gasfield-labour-andy-burnham-zack-polanski-uk-politics-latest-news',
+          apiUrl: 'https://content.guardianapis.com/politics/live/2026/oct/21/jackdaw-gasfield-labour-andy-burnham-zack-polanski-uk-politics-latest-news',
+          fields: {
+            trailText: 'The Jackdaw field will start supplying gas to homes and businesses from the end of the month, the government said',
+            byline: 'Andrew Sparrow',
+            thumbnail: 'https://media.guim.co.uk/6e8ba5c47c1e50cec9f335d9e6acbf2cde1004f4/1031_0_5157_4126/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
+          actions: []
+        },
+        {
+          id: 'business/live/2026/oct/21/uk-inflation-jump-rising-motor-fuels-cost-jackdaw-gas-field-latest-news-updates',
+          type: 'liveblog',
+          sectionId: 'business',
+          sectionName: 'Business',
+          webPublicationDate: '2026-10-21T11:12:54Z',
+          webTitle: 'Total UK government debt hits £3tn for first time while inflation jumps to highest in nearly a year – business live',
+          webUrl: 'https://www.theguardian.com/business/live/2026/oct/21/uk-inflation-jump-rising-motor-fuels-cost-jackdaw-gas-field-latest-news-updates',
+          apiUrl: 'https://content.guardianapis.com/business/live/2026/oct/21/uk-inflation-jump-rising-motor-fuels-cost-jackdaw-gas-field-latest-news-updates',
+          fields: {
+            trailText: 'French government bond yields highest since 2002 as country rocked by protests; UK approves controversial North Sea gasfield Jackdaw',
+            byline: 'Julia Kollewe',
+            thumbnail: 'https://media.guim.co.uk/0704a051cf34b4e413070fc91bc4f1e95d37619a/655_0_6797_5438/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
+          actions: []
+        },
+        {
+          id: 'politics/2026/oct/21/bereaved-civil-service-families-tax-bills-pension-scheme-delays-capita-death-in-benefit-claims',
+          type: 'article',
+          sectionId: 'politics',
+          sectionName: 'Politics',
+          webPublicationDate: '2026-10-21T11:12:49Z',
+          webTitle: 'Bereaved civil service families could face ‘unjust’ tax bills due to pension scheme delays',
+          webUrl: 'https://www.theguardian.com/politics/2026/oct/21/bereaved-civil-service-families-tax-bills-pension-scheme-delays-capita-death-in-benefit-claims',
+          apiUrl: 'https://content.guardianapis.com/politics/2026/oct/21/bereaved-civil-service-families-tax-bills-pension-scheme-delays-capita-death-in-benefit-claims',
+          fields: {
+            trailText: 'MPs say ‘chaos’ at Capita-run scheme could mean some claims miss tax-free time limit on lump sum payments',
+            byline: 'Anna Tims',
+            thumbnail: 'https://media.guim.co.uk/7e05629c61b0333e56dc3fe3ceba89fbfbcf46d2/688_0_6880_5504/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
+          actions: []
+        },
+        {
+          id: 'us-news/ng-interactive/2026/oct/21/louisiana-eviction-courts-system',
+          type: 'interactive',
+          sectionId: 'us-news',
+          sectionName: 'US news',
+          webPublicationDate: '2026-10-21T11:00:04Z',
+          webTitle: '‘Sham tribunal’: one family’s battle with Louisiana’s ‘feudal’ eviction courts',
+          webUrl: 'https://www.theguardian.com/us-news/ng-interactive/2026/oct/21/louisiana-eviction-courts-system',
+          apiUrl: 'https://content.guardianapis.com/us-news/ng-interactive/2026/oct/21/louisiana-eviction-courts-system',
+          fields: {
+            trailText: 'In rural Louisiana, eviction hearings are held at kitchen tables and other unorthodox venues – and many justices have little legal training',
+            byline: 'Oliver Laughland and Will Craft with photography by Annie Flanagan',
+            thumbnail: 'https://media.guim.co.uk/28744338567c9a6ace41dba2b08cef8fb86cd826/17_0_3167_2534/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
+          actions: []
+        },
+        {
+          id: 'football/2026/oct/21/manchester-city-fifa-rules-grassroots-philipp-lahm',
+          type: 'article',
+          sectionId: 'football',
+          sectionName: 'Football',
+          webPublicationDate: '2026-10-21T11:00:04Z',
+          webTitle: 'Football must not be detached from its roots as was the case with Manchester City | Philipp Lahm',
+          webUrl: 'https://www.theguardian.com/football/2026/oct/21/manchester-city-fifa-rules-grassroots-philipp-lahm',
+          apiUrl: 'https://content.guardianapis.com/football/2026/oct/21/manchester-city-fifa-rules-grassroots-philipp-lahm',
+          fields: {
+            trailText: 'City behaved much like other top clubs but their rule-breaking deserves to be punished. The Bundesliga, where members have a controlling stake, can show the way forward',
+            byline: 'Philipp Lahm',
+            thumbnail: 'https://media.guim.co.uk/e3291a2244a700715dd2419646e7512cb1e4cb12/324_0_4139_3312/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/sport',
+          pillarName: 'Sport',
+          actions: []
+        },
+        {
+          id: 'us-news/ng-interactive/2026/oct/21/louisiana-justice-of-peace-courts-methodology',
+          type: 'interactive',
+          sectionId: 'us-news',
+          sectionName: 'US news',
+          webPublicationDate: '2026-10-21T11:00:03Z',
+          webTitle: 'How the Guardian reported on Louisiana’s justice of the peace courts',
+          webUrl: 'https://www.theguardian.com/us-news/ng-interactive/2026/oct/21/louisiana-justice-of-peace-courts-methodology',
+          apiUrl: 'https://content.guardianapis.com/us-news/ng-interactive/2026/oct/21/louisiana-justice-of-peace-courts-methodology',
+          fields: {
+            trailText: 'Reporters scanned more than 11,000 pages and processed thousands of hand-written and often incomplete records',
+            byline: 'Will Craft and Tom Richards with Rachel Shur',
+            thumbnail: 'https://media.guim.co.uk/85adc058493b4219f688bdd21b2be358213d1a14/0_173_3316_2654/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
+          actions: []
+        },
+        {
+          id: 'sport/2026/oct/21/austin-gp-about-much-more-than-potential-kimi-antonelli-first-f1-world-title',
+          type: 'article',
+          sectionId: 'sport',
+          sectionName: 'Sport',
+          webPublicationDate: '2026-10-21T11:00:03Z',
+          webTitle: ' Austin GP is about much more than potential for Antonelli’s first F1 world title',
+          webUrl: 'https://www.theguardian.com/sport/2026/oct/21/austin-gp-about-much-more-than-potential-kimi-antonelli-first-f1-world-title',
+          apiUrl: 'https://content.guardianapis.com/sport/2026/oct/21/austin-gp-about-much-more-than-potential-kimi-antonelli-first-f1-world-title',
+          fields: {
+            trailText: 'The young Italian driver’s maiden championship is all but secured but Mercedes upgrades will inform next year’s run to the line',
+            byline: 'Giles Richards in Austin',
+            thumbnail: 'https://media.guim.co.uk/b7b507c1570357d7d2a5587e125a8a33c1a10667/120_92_3593_2874/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/sport',
+          pillarName: 'Sport',
+          actions: []
+        },
+        {
+          id: 'global-development/2026/oct/21/el-salvador-crackdown-president-bukele-mass-arrest-allegations-torture-killing-prison',
+          type: 'article',
+          sectionId: 'global-development',
+          sectionName: 'Global development',
+          webPublicationDate: '2026-10-21T11:00:02Z',
+          webTitle: '‘I never saw my son, until they handed him over in a bag’: inside El Salvador’s brutal crime crackdown',
+          webUrl: 'https://www.theguardian.com/global-development/2026/oct/21/el-salvador-crackdown-president-bukele-mass-arrest-allegations-torture-killing-prison',
+          apiUrl: 'https://content.guardianapis.com/global-development/2026/oct/21/el-salvador-crackdown-president-bukele-mass-arrest-allegations-torture-killing-prison',
+          fields: {
+            trailText: 'President Nayib Bukele’s campaign of mass arrest has been marked by allegations of torture and killing. Four years on, 120,000 people are still in prison',
+            byline: 'Harriet Barber',
+            thumbnail: 'https://media.guim.co.uk/7b84fc671ba68a2bf683a28d81cccfd23ef9dcbe/120_99_2709_2168/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
+          actions: []
+        },
+        {
+          id: 'uk-news/2026/oct/21/stratford-internationalinternational-trains-budget-boost',
+          type: 'article',
+          sectionId: 'uk-news',
+          sectionName: 'UK news',
+          webPublicationDate: '2026-10-21T10:59:12Z',
+          webTitle: 'Stratford International on track to get cross-Channel trains in budget boost',
+          webUrl: 'https://www.theguardian.com/uk-news/2026/oct/21/stratford-internationalinternational-trains-budget-boost',
+          apiUrl: 'https://content.guardianapis.com/uk-news/2026/oct/21/stratford-internationalinternational-trains-budget-boost',
+          fields: {
+            trailText: 'Sadiq Khan says upgrade would unlock station’s potential and allow it to live up to its name and be truly international',
+            byline: 'Joanna Partridge',
+            thumbnail: 'https://media.guim.co.uk/56b6cdee5adaae08a5660ee1f509c79ec8c515f7/0_0_4267_3413/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
+          actions: []
+        }
+      ]
     }
   },
 
@@ -220,6 +322,13 @@ const DATA = {
       "description": "Project source code and documentation"
     }
   ]
+}
+const initActions = (data) => {
+  const resp = data.map((ele, pos) => {
+    return { ...ele, actions: [] }
+  })
+
+  return resp
 }
 
 
