@@ -5,32 +5,36 @@ import DATA from '../../data'
 
 // news card
 const NewsCard = ({ icons, news, isLast, size }) => {
-
-
     // hook init
     const nav = useNavigate();
+
     return (
         <>
-            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.uuid}`) }}>
+            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`) }}>
+
+
                 {/* image  */}
-                <div className={"w-full aspect-3/2 overflow-hidden"} style={{ maxWidth: size === "s" ? "7.5rem" : size === "xs" ? "7rem" : "12rem" }}>
-                    <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&h=500&fit=crop&auto=format" alt="image" className="w-fit hover:scale-[1.02] transition-transform duration-300" />
+                <div className={`w-full aspect-3/2 overflow-hidden ${size === "xs" ? "h-22" : ""}`} style={{ maxWidth: size === "s" ? "7.5rem" : size === "xs" ? "7rem" : "10rem" }}>
+                    <img src={news.fields.thumbnail} alt="image" className="w-full hover:scale-[1.02] transition-transform duration-300 h-full" />
                 </div>
 
                 <div className="space-y-1.5 cursor-pointer" >
 
+
                     {/* topic */}
                     <p className="uppercase text-xs font-medium tracking-widest text-gray-400">{news.sectionName}</p>
                     {/*  title */}
-                    <p className={`font-display text-gray-900 hover:text-gray-600 font-semibold ${size === "xs" ? "" : "text-lg"}`}>{news.webTitle}</p>
+                    <p className={`font-display text-gray-900 hover:text-gray-600 font-semibold ${size === "xs" ? "" : "text-lg"}`}>{size === "xs" ? news.webTitle.slice(0, 55) + " ..." : news.webTitle}</p>
                     {/* desc */}
-                    <p className={`text-sm text-gray-500 ${size === "xs" || size === "s" ? "hidden" : ""}`}>{news.fields?.trailText}</p>
+                    <p className={`text-sm text-gray-500 ${size === "xs" || size === "s" ? "hidden" : ""}`}>{news.fields?.trailText.length > 147 ? news.fields?.trailText.slice(0, 147) + " ..." : news.fields?.trailText + "."}</p>
+
+
                     {/* bottom section */}
                     <div className="flex justify-between items-center">
 
                         {/* source and date */}
                         <div className={`flex justify-between items-center text-xs space-x-7 ${size === "xs" ? "flex-col space-x-0 items-start space-y-1" : ""}`}>
-                            <p className="text-xs text-gray-400">{news.fields?.byline.slice(0,14)} {news.fields?.byline.length>14?"...":""}
+                            <p className="text-xs text-gray-400">{news.fields?.byline.slice(0, 14)} {news.fields?.byline.length > 14 ? "..." : ""}
                             </p>
                             <p className="text-gray-400">
                                 {new Date(news.webPublicationDate).toLocaleDateString("en-IN", {
@@ -54,7 +58,6 @@ const NewsCard = ({ icons, news, isLast, size }) => {
                                     />
                                 })
                             }
-
                         </div>
                     </div>
                 </div>

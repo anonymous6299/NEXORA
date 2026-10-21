@@ -54,7 +54,7 @@ const RecommendedNews = () => {
                             size={"xs"}
                             icons={true}
                             key={pos}
-                            isLast={pos + 1 === DATA.rl_articles.length}
+                            isLast={pos + 1 === DATA.news.response.results.length}
                         />
                     }):<p className="text-sm text-gray-400">No recommendations found yet.</p>
                 }

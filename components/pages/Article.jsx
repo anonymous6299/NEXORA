@@ -7,7 +7,7 @@ import { NewsError } from '../ui/NewsLoadErr'
 import DATA from '../../data'
 import { useParams } from 'react-router'
 import ImagePlaceholer from '../ui/ImagePlaceholer'
-
+import DOMPurify from "dompurify";
 
 // news content component
 const NewsContent = ({ ARTICLE, DISPLAY }) => {
@@ -15,14 +15,20 @@ const NewsContent = ({ ARTICLE, DISPLAY }) => {
         <div className={`w-[65%] ${DISPLAY ? "" : "hidden"}`}>
             {/* title, category and author */}
             <div className=" pb-3 space-y-5">
-                <p className="uppercase text-xs font-medium text-gray-400">{ARTICLE?.topics?.[0]}</p>
-                <p className="capitalize font-display text-4xl font-bold text-gray-950 leading-tight">{ARTICLE?.title}</p>
+                <p className="uppercase text-xs font-medium text-gray-400">{ARTICLE?.sectionName}</p>
+                <p className="capitalize font-display text-4xl font-bold text-gray-950 leading-tight">{ARTICLE?.webTitle}</p>
 
                 {/* publisher and date */}
                 <div className="flex w-fit justify-between space-x-4 items-center">
-                    <p className="text-sm font-medium text-gray-700 capitalize">{ARTICLE?.publisher}</p>
+                    <p className="text-sm font-medium text-gray-700 capitalize">{ARTICLE?.fields?.byline}</p>
                     <p className="text-sm text-gray-300">·</p>
-                    <p className="text-sm text-gray-400">{ARTICLE?.published_at?.slice(8, 10)} {DATA.MONTHS[Number.parseInt(ARTICLE?.published_at?.slice(5, 7))]} {ARTICLE?.published_at?.slice(0, 4)}</p>
+                    <p className="text-sm text-gray-400"> {new Date(ARTICLE?.webPublicationDate).toLocaleDateString("en-IN", {
+                        timeZone: "Asia/Kolkata",
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                    })}
+                    </p>
                 </div>
             </div>
 
@@ -45,11 +51,12 @@ const NewsContent = ({ ARTICLE, DISPLAY }) => {
             {/* image and content */}
             <div>
                 {/* ArticleLeadImage */}
-                {typeof ARTICLE?.thumbnail === "strin" && ARTICLE?.thumbnail.length !== 0 ? <img src={ARTICLE?.thumbnail} alt="image" /> : <ImagePlaceholer />}
+                {typeof ARTICLE?.fields?.thumbnail === "string" && ARTICLE?.fields?.thumbnail.length !== 0 ? <img src={ARTICLE?.fields?.thumbnail} alt="image" className='w-full'/> : <ImagePlaceholer />}
                 {/* <AISummary /> */}
-                <div className="text-justify space-y-7 my-10 text-gray-700 leading-10">
-                    <p>{ARTICLE?.body}</p>
-                        
+                <div className="text-justify space-y-7 my-10 text-gray-700 leading-10" 
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ARTICLE?.fields?.body) }}
+                >
+
                 </div>
             </div>
         </div>
@@ -109,7 +116,8 @@ const NotesSection = ({ DISPLAY }) => {
 
 const Article = () => {
     // hook init for uuid
-    const { id } = useParams();
+    const params = useParams();
+    const id = params['*'];
 
     // article and component display states
     const [Article, setArticle] = useState(null);
@@ -120,9 +128,9 @@ const Article = () => {
     const fetchArticle = async () => {
         try {
             setArtIsLoading(true)
-            let resp = await fetch(`/newsapi/v1/details?uuid=${id}`);
+            let resp = await fetch(`https://content.guardianapis.com/${id}?api-key=${import.meta.env.VITE_API_KEY_GUARDIAN}&show-fields=thumbnail,byline,body`);
             resp = await resp.json();
-            setArticle(resp.data);
+            setArticle(resp.response.content);
             setArtIsLoading(false);
         } catch (error) {
             setArtIsLoading(false)

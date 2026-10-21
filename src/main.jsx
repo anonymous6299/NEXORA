@@ -20,7 +20,7 @@ const router = createBrowserRouter([
       { path: "/saved", element: <SavedArticles /> },
       { path: "/about", element: <About /> },
       { path: "/contact", element: <Contact /> },
-      { path: "/article/:id", element: <Article /> }
+      { path: "/article/*", element: <Article /> }
     ],
   },
 ]);
