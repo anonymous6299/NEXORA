@@ -1,4 +1,4 @@
-
+// will be rendered when ai summary is requested
 
 const AISummary = () => {
     return (

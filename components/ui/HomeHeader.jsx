@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
+// imports
+import { useState } from "react";
 import SVG from "./SVG";
 import DATA from "../../data";
 
-
+// header for home page-shows filter options
 const HomeHeader = () => {
     // dropdown display
     const [DropdownDisplay, setDropdownDisplay] = useState(false);

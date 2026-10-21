@@ -1,4 +1,4 @@
-// common header for home and saved
+// common header for headings
 
 const CommonHeader = ({title,hr=true,articles=true}) => {
   return (

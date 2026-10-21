@@ -1,13 +1,10 @@
+// imports
 import DATA from "../../data"
 import CommonHeader from "../ui/CommonHeader"
 import HomeHeader from "../ui/HomeHeader"
 import NewsCard from "../ui/NewsCard"
 import {NewsCardLoading, NewsError, RecommendationError} from "../ui/NewsLoadErr"
 import Pagination from "../ui/Pagination"
-import SVG from "../ui/SVG"
-
-
-
 
 
 // latest news

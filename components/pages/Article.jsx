@@ -1,36 +1,28 @@
 // imports
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SVG from '../ui/SVG'
 import AISummary from '../ui/AISummary'
 import ArticleLoading from '../ui/ArticleLoading'
 import { NewsError } from '../ui/NewsLoadErr'
-import Context from "../../context/ContextInit";
 import DATA from '../../data'
+import { useParams } from 'react-router'
+import ImagePlaceholer from '../ui/ImagePlaceholer'
 
 
 // news content component
-const NewsContent = () => {
-    const content = [
-        "In a historic development, representatives from 142 nations gathered in Geneva's Palais des Nations to sign the Global AI Governance Accord — the most significant international tech policy agreement in decades.",
-        "The framework establishes binding safety standards for frontier AI systems, mandates transparency requirements for large language models, and creates an independent international monitoring body with enforcement authority.",
-        `"This is the moment the international community recognized that artificial intelligence requires the same level of coordinated governance as nuclear technology," said Dr. Amara Diallo, the accord's chief architect.`,
-        "The agreement includes provisions for a global AI incident database — a shared repository where member states must report significant AI-related failures within 72 hours. Signatories have committed to a phased implementation schedule beginning in January 2027, with full compliance required by 2030.",
-        "Critics argue the reporting threshold remains too high, but supporters note it represents an unprecedented level of international information sharing. The accord is expected to reshape how private AI developers plan their research roadmaps, particularly around evaluation and red-teaming requirements.",
-        "A parallel technical committee will convene quarterly to update safety benchmarks as the technology evolves — a recognition that static regulations cannot keep pace with rapid model development."
-    ]
-
+const NewsContent = ({ ARTICLE, DISPLAY }) => {
     return (
-        <div className="w-[65%]">
+        <div className={`w-[65%] ${DISPLAY ? "" : "hidden"}`}>
             {/* title, category and author */}
             <div className=" pb-3 space-y-5">
-                <p className="uppercase text-xs font-medium text-gray-400">technology</p>
-                <p className="capitalize font-display text-4xl font-bold text-gray-950 leading-tight">global ai governance framework reaches critical milestone</p>
+                <p className="uppercase text-xs font-medium text-gray-400">{ARTICLE?.topics?.[0]}</p>
+                <p className="capitalize font-display text-4xl font-bold text-gray-950 leading-tight">{ARTICLE?.title}</p>
 
                 {/* publisher and date */}
                 <div className="flex w-fit justify-between space-x-4 items-center">
-                    <p className="text-sm font-medium text-gray-700 capitalize">the financial times</p>
+                    <p className="text-sm font-medium text-gray-700 capitalize">{ARTICLE?.publisher}</p>
                     <p className="text-sm text-gray-300">·</p>
-                    <p className="text-sm text-gray-400">September 1, 2026</p>
+                    <p className="text-sm text-gray-400">{ARTICLE?.published_at?.slice(8, 10)} {DATA.MONTHS[Number.parseInt(ARTICLE?.published_at?.slice(5, 7))]} {ARTICLE?.published_at?.slice(0, 4)}</p>
                 </div>
             </div>
 
@@ -52,14 +44,11 @@ const NewsContent = () => {
 
             {/* image and content */}
             <div>
-                <img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=900&h=500&fit=crop&auto=format" alt="image" />
-                <AISummary />
-                <div className="text-justify space-y-7 my-10 text-gray-700">
-                    {
-                        content.map((ele, pos) => {
-                            return <p key={pos}>{ele}</p>
-                        })
-                    }
+                {/* ArticleLeadImage */}
+                {typeof ARTICLE?.thumbnail === "strin" && ARTICLE?.thumbnail.length !== 0 ? <img src={ARTICLE?.thumbnail} alt="image" /> : <ImagePlaceholer />}
+                {/* <AISummary /> */}
+                <div className="text-justify space-y-7 my-10 text-gray-700 leading-10">
+                    <p>{ARTICLE?.body}</p>
                 </div>
             </div>
         </div>
@@ -68,12 +57,12 @@ const NewsContent = () => {
 
 
 // notes content component
-const NotesSection = () => {
+const NotesSection = ({ DISPLAY }) => {
     // states
     const [Note, setNote] = useState("");
     const [DeleteNoteDisplay, setDeleteNoteDisplay] = useState(false);
     return (
-        <div className='border border-gray-100 p-5 space-y-4'>
+        <div className={`${DISPLAY ? "" : "hidden"} border border-gray-100 p-5 space-y-4`}>
             {/* heading and count*/}
             <div className="flex items-center space-x-3">
                 <p className="uppercase text-gray-500 text-sm font-semibold tracking-wider">notes</p>
@@ -118,15 +107,44 @@ const NotesSection = () => {
 
 
 const Article = () => {
+    // hook init for uuid
+    const { id } = useParams();
+
+    // article and component display states
+    const [Article, setArticle] = useState(null);
+    const [ArtIsLoading, setArtIsLoading] = useState(true);
+    const [ArtError, setArtError] = useState(false);
+
+    // api key
+    const key = import.meta.env.VITE_API_KEY_NEWS;
+
+    // fn to fetch article when this page is opened
+    const fetchArticle = async () => {
+        try {
+            setArtIsLoading(true)
+            let resp = await fetch(`/newsapi/v1/details?uuid=${id}`);
+            resp = await resp.json();
+            setArticle(resp.data);
+            setArtIsLoading(false);
+        } catch (error) {
+            setArtIsLoading(false)
+            setArtError(true);
+        }
+    }
+
+    useEffect(() => {
+        fetchArticle()
+    }, [])
+
     return (
         <div className="flex items-start px-40 my-10 justify-between">
             {/* news content on left */}
-            <NewsContent />
+            <NewsContent ARTICLE={Article} DISPLAY={!ArtIsLoading && !ArtError} />
 
             {/* notes on right */}
-            <NotesSection />
-            {/* <ArticleLoading/> */}
-            {/* <NewsError /> */}
+            <NotesSection DISPLAY={!ArtIsLoading && !ArtError} />
+            <ArticleLoading DISPLAY={ArtIsLoading} />
+            <NewsError DISPLAY={ArtError} retry={fetchArticle} />
         </div>
     )
 }

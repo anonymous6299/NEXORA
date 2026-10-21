@@ -1,5 +1,4 @@
 // imports
-
 import { Link, useLocation } from "react-router";
 
 // navlink component

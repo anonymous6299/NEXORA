@@ -1,11 +1,11 @@
+// will be displayed when article content is being fetched in /article page
 
-
-const ArticleLoading = () => {
+const ArticleLoading = ({DISPLAY}) => {
     return (
         <>
 
             {/* left side content loading */}
-            <div className="w-[65%] animate-pulse">
+            <div className={`w-[65%] animate-pulse ${DISPLAY?"":"hidden"}`}>
                 <div className="h-2.5 w-28 bg-gray-300 mb-4"></div>
                 <div className="mb-6 space-y-3">
                     {
@@ -50,7 +50,7 @@ const ArticleLoading = () => {
 
 
             {/* right side content loading */}
-            <div className="w-76 animate-pulse">
+            <div className={`w-76 animate-pulse ${DISPLAY?"":"hidden"}`}>
                 <div className="h-2.5 w-28 bg-gray-300 mb-5"></div>
                 <div className="space-y-3 mb-5">
                     {

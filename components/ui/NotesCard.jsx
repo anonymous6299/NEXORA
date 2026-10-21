@@ -1,7 +1,9 @@
+// imports
 import DATA from "../../data"
 import NewsCard from "./NewsCard"
 
 
+// card to display notes along with news in notes section
 const NotesCard = () => {
     return (
         <div className="border border-gray-300/50 hover:border-gray-300 transition-colors p-5 hover:cursor-pointer">

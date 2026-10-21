@@ -12,7 +12,6 @@ const DATA = {
   SVG_PROPS: {
     SVGOthers: {
       fill: "none",
-      strokeWidth: 1.5,
       stroke: "currentColor",
     },
     PathOthers: {
@@ -174,7 +173,7 @@ const DATA = {
   ],
 
 
-  
+
   // filter country and language
   countries: ["India", "France", "Japan", "Brazil", "Germany"],
   languages: ["Hindi", "French", "Japanese", "Portuguese", "German"],

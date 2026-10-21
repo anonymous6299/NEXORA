@@ -1,11 +1,10 @@
+// imports
 import DATA from "../../data"
-
-
 
 // component
 const Contact = () => {
 
-  
+
   return (
     <div className="my-16 flex justify-between items-start px-40">
 
@@ -50,13 +49,12 @@ const Contact = () => {
 
         {/* data */}
         {
-          DATA.C_Data.map((ele,pos)=>{
+          DATA.C_Data.map((ele, pos) => {
             return <div className="border-b border-gray-200 py-6" key={pos}>
-              {console.log(Object.keys(ele))}
-          <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">{Object.keys(ele)[0]}</p>
-          <p className="text-base font-medium text-gray-900">{ele[Object.keys(ele)[0]]}</p>
-          <p className="text-xs text-gray-400 mt-2">{ele.description}</p>
-        </div>
+              <p className="text-xs uppercase tracking-[0.2em] text-gray-400 mb-2">{Object.keys(ele)[0]}</p>
+              <p className="text-base font-medium text-gray-900">{ele[Object.keys(ele)[0]]}</p>
+              <p className="text-xs text-gray-400 mt-2">{ele.description}</p>
+            </div>
           })
         }
       </div>
