@@ -20,18 +20,11 @@ const NewsContent = ({
     setIsAvailOffline 
 }) => {
     const {
-        ChangeArticle,
-        set_RL_ARTICLES,
-        set_OFFLINE_ARTICLES,
-        set_NOTES_ARTICLES,
+        initiateRL,
     } = useContext(Context);
 
     const btnClass = "border border-gray-200 hover:border-gray-400 capitalize text-sm px-3 py-1.5 cursor-pointer flex items-center space-x-2.5 justify-between transition-colors "
 
-    const btnClick = (ChangeArticleData, AvailabilityFunction) => {
-        ChangeArticle(...ChangeArticleData);
-        AvailabilityFunction(p => !p)
-    }
     return (
         <div className={`w-[65%] ${DISPLAY ? "" : "hidden"}`}>
             {/* title, category and author */}
@@ -61,7 +54,7 @@ const NewsContent = ({
                 <button
                     className={btnClass + `${isReadLater ? "bg-black text-white" : ""}`}
                     onClick={() => {
-                        btnClick([set_RL_ARTICLES, "rl_articles", isReadLater], setIsReadLater)
+                        initiateRL(isReadLater, setIsReadLater)
                     }}>
 
                     <SVG
@@ -163,7 +156,7 @@ const NotesSection = ({ DISPLAY }) => {
 
 
 const Article = () => {
-    // hook init for uuid
+    // usea params hook init for id
     const params = useParams();
     const id = params['*'];
 

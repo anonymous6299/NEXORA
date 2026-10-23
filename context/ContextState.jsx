@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import Context from "./ContextInit"
+import ReadLater from "../components/logic/ReadLater";
 
 
 const ContextState = ({ children }) => {
@@ -20,18 +21,9 @@ const ContextState = ({ children }) => {
     // state representing article currently being viewed in /article page
     const [CurrentArtcle, setCurrentArtcle] = useState(null);
 
-    // function to change any article data and automatically update in localstorage
-    const ChangeArticle = (stateFunction, key, availability) => {
-        if (availability) {
-            stateFunction(prev => prev.map((ele) => ele !== CurrentArtcle));
-            const data = JSON.parse(localStorage.getItem(key));
-            const newdata = data.filter(ele => ele.id !== CurrentArtcle.id)
-            localStorage.setItem(key, JSON.stringify(newdata))
-        } else {
-            stateFunction(prev => ([...prev, CurrentArtcle]));
-            const data = JSON.parse(localStorage.getItem(key));
-            localStorage.setItem(key, JSON.stringify([...data, CurrentArtcle]))
-        }
+    // read later function
+    const initiateRL = (isReadLater, setIsReadLater) => {
+        ReadLater(set_RL_ARTICLES, "rl_articles",CurrentArtcle,isReadLater, setIsReadLater)
     }
 
     // tasks to be performed on very first render
@@ -57,7 +49,7 @@ const ContextState = ({ children }) => {
             set_OFFLINE_ARTICLES,
             set_NOTES_ARTICLES,
             setCurrentArtcle,
-            ChangeArticle
+            initiateRL
         }}>
             {children}
         </Context.Provider>
