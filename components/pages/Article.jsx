@@ -1,5 +1,5 @@
 // imports
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import SVG from '../ui/SVG'
 import AISummary from '../ui/AISummary'
 import ArticleLoading from '../ui/ArticleLoading'
@@ -10,7 +10,7 @@ import ImagePlaceholer from '../ui/ImagePlaceholer'
 import DOMPurify from "dompurify";
 import Context from '../../context/ContextInit'
 import checkAvailability from '../logic/CheckAvailbility'
-
+import GenerateAISummary from '../logic/AISummary'
 // news content component
 const NewsContent = ({
     ARTICLE,
@@ -29,6 +29,29 @@ const NewsContent = ({
 
     const btnClass = "border border-gray-200 hover:border-gray-400 capitalize text-sm px-3 py-1.5 cursor-pointer flex items-center space-x-2.5 justify-between transition-colors "
 
+    const imgRef = useRef(null);
+    // ai summary state
+    const [AI_SUMMARY, set_AI_SUMMARY] = useState({ text: "", loading: false, dipslay: false })
+
+    const GenerateSummary = async () => {
+        imgRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+        window.scrollBy({
+            top: 300,
+            behavior: "smooth"
+        });
+        try {
+            set_AI_SUMMARY(prev => ({ ...prev, loading: true, display: true }))
+            const resp = await GenerateAISummary(ARTICLE?.webTitle, ARTICLE?.fields?.body)
+            set_AI_SUMMARY(prev => ({ ...prev, loading: false, text: resp }))
+        } catch (error) {
+            console.log(error)
+            set_AI_SUMMARY(prev => ({ ...prev, loading: false, text: "Couldn't generate summary. Try again later." }))
+        }
+    }
     return (
         <div className={`w-[65%] ${DISPLAY ? "" : "hidden"}`}>
             {/* title, category and author */}
@@ -90,7 +113,10 @@ const NewsContent = ({
 
                 {/* generate ai summary */}
                 <button
-                    className={btnClass}>
+                    className={btnClass + "disabled:cursor-not-allowed"}
+                    disabled={AI_SUMMARY.text.length !== 0}
+                    onClick={GenerateSummary}
+                >
                     <SVG
                         d={DATA.D_Val_Article[2]}
                         className={"size-5"}
@@ -103,10 +129,17 @@ const NewsContent = ({
             {/* image and content */}
             <div>
                 {/* article image */}
-                {typeof ARTICLE?.fields?.thumbnail === "string" && ARTICLE?.fields?.thumbnail.length !== 0 ? <img src={ARTICLE?.fields?.thumbnail} alt="image" className='w-full' /> : <ImagePlaceholer />}
+                {typeof ARTICLE?.fields?.thumbnail === "string" && ARTICLE?.fields?.thumbnail.length !== 0 ? <img 
+                ref={imgRef} 
+                src={ARTICLE?.fields?.thumbnail} 
+                alt="image" 
+                className='w-full' /> : <ImagePlaceholer />}
 
                 {/* ai summary */}
-                {/* <AISummary /> */}
+                <AISummary
+                    display={AI_SUMMARY.dipslay}
+                    summaryProps={AI_SUMMARY}
+                />
 
 
                 <div className="text-justify space-y-7 my-10 text-gray-700 leading-10"
@@ -210,6 +243,7 @@ const Article = () => {
     }
 
     useEffect(() => {
+        window.scrollTo(0, 0);
         fetchArticle()
     }, [])
 

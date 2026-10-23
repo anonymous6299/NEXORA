@@ -94,7 +94,7 @@ const Home = () => {
             </div>
 
             {/* bottom pagination */}
-            <Pagination />
+            <Pagination display={true}/>
         </div>
     )
 }

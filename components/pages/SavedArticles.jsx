@@ -19,7 +19,7 @@ const ReadLater = ({ARTICLES}) => {
       {/* articles */}
       {ARTICLES.length>0?ARTICLES.map((ele, pos) => {
         return <NewsCard
-          icons={true}
+          icons={false}
           news={ele}
           isLast={pos + 1 === DATA.rl_articles.length}
           key={pos}
