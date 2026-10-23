@@ -3,12 +3,12 @@ import SVG from "./SVG"
 import DATA from '../../data'
 
 // pagination
-const Pagination = ({ Pg_Type }) => {
+const Pagination = ({ Pg_Type,display }) => {
     const classname = "size-4"
 
     const btnClass = "p-1.5 border border-gray-200 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
     return (
-        <div className="flex justify-between items-center w-fit my-5 space-x-4">
+        <div className={`${display?"flex":"hidden"} justify-between items-center w-fit my-5 space-x-4`}>
 
             {/* prev */}
             <button className={btnClass}>

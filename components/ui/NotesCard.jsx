@@ -1,14 +1,13 @@
 // imports
-import DATA from "../../data"
 import NewsCard from "./NewsCard"
 
 
 // card to display notes along with news in notes section
-const NotesCard = () => {
+const NotesCard = ({article}) => {
     return (
         <div className="border border-gray-300/50 hover:border-gray-300 transition-colors p-5 hover:cursor-pointer">
             <NewsCard
-                news={DATA.rl_articles[0]}
+                news={article}
                 size={"s"}
             />
 

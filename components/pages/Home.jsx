@@ -14,6 +14,7 @@ const LatestNews = () => {
             <CommonHeader
                 title={"latest news"}
                 hr={false}
+                length={ DATA.news.response.results.length}
             />
             <div className="mt-5">
                 {

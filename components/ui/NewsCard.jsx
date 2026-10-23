@@ -2,15 +2,17 @@
 import { useNavigate } from "react-router";
 import SVG from "./SVG";
 import DATA from '../../data'
+import { useContext } from "react";
+import Context from "../../context/ContextInit";
 
 // news card
 const NewsCard = ({ icons, news, isLast, size }) => {
     // hook init
     const nav = useNavigate();
-
+    const {setCurrentArtcle} = useContext(Context);
     return (
         <>
-            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`) }}>
+            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`);setCurrentArtcle(news) }}>
 
 
                 {/* image  */}

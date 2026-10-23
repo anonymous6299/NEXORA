@@ -1,5 +1,5 @@
 // imports
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import SVG from '../ui/SVG'
 import AISummary from '../ui/AISummary'
 import ArticleLoading from '../ui/ArticleLoading'
@@ -8,9 +8,30 @@ import DATA from '../../data'
 import { useParams } from 'react-router'
 import ImagePlaceholer from '../ui/ImagePlaceholer'
 import DOMPurify from "dompurify";
+import Context from '../../context/ContextInit'
 
 // news content component
-const NewsContent = ({ ARTICLE, DISPLAY }) => {
+const NewsContent = ({ 
+    ARTICLE, 
+    DISPLAY, 
+    isReadLater, 
+    setIsReadLater,
+    isAvailOffline,
+    setIsAvailOffline 
+}) => {
+    const {
+        ChangeArticle,
+        set_RL_ARTICLES,
+        set_OFFLINE_ARTICLES,
+        set_NOTES_ARTICLES,
+    } = useContext(Context);
+
+    const btnClass = "border border-gray-200 hover:border-gray-400 capitalize text-sm px-3 py-1.5 cursor-pointer flex items-center space-x-2.5 justify-between transition-colors "
+
+    const btnClick = (ChangeArticleData, AvailabilityFunction) => {
+        ChangeArticle(...ChangeArticleData);
+        AvailabilityFunction(p => !p)
+    }
     return (
         <div className={`w-[65%] ${DISPLAY ? "" : "hidden"}`}>
             {/* title, category and author */}
@@ -37,24 +58,51 @@ const NewsContent = ({ ARTICLE, DISPLAY }) => {
 
             {/* cta buttons */}
             <div className="flex items-center space-x-3 my-7">
-                {
-                    ["read later", "save offline", "generate summary"].map((ele, pos) => {
-                        return <button key={pos} className="border border-gray-200 hover:border-gray-400 capitalize text-sm px-3 py-1.5 cursor-pointer flex items-center space-x-2.5 justify-between transition-colors">
-                            <SVG d={DATA.D_Val_Article[pos]} className={"size-5"} {...DATA.SVG_PROPS} />
-                            <p className='font-medium'>{ele}</p>
-                        </button>
-                    })
-                }
+                <button
+                    className={btnClass + `${isReadLater ? "bg-black text-white" : ""}`}
+                    onClick={() => {
+                        btnClick([set_RL_ARTICLES, "rl_articles", isReadLater], setIsReadLater)
+                    }}>
+
+                    <SVG
+                        d={DATA.D_Val_Article[0]}
+                        className={"size-5"}
+                        {...DATA.SVG_PROPS}
+                        fill={isReadLater ? "white" : null} />
+                    <p className="font-medium">{isReadLater ? "Saved" : "read later"}</p>
+                </button>
+
+                <button
+                    className={btnClass}>
+                    <SVG
+                        d={DATA.D_Val_Article[1]}
+                        className={"size-5"}
+                        {...DATA.SVG_PROPS} />
+                    <p className="font-medium">save offline</p>
+                </button>
+
+                <button
+                    className={btnClass}>
+                    <SVG
+                        d={DATA.D_Val_Article[2]}
+                        className={"size-5"}
+                        {...DATA.SVG_PROPS} />
+                    <p className="font-medium">generate summary</p>
+                </button>
             </div>
 
 
             {/* image and content */}
             <div>
-                {/* ArticleLeadImage */}
-                {typeof ARTICLE?.fields?.thumbnail === "string" && ARTICLE?.fields?.thumbnail.length !== 0 ? <img src={ARTICLE?.fields?.thumbnail} alt="image" className='w-full'/> : <ImagePlaceholer />}
+                {/* article image */}
+                {typeof ARTICLE?.fields?.thumbnail === "string" && ARTICLE?.fields?.thumbnail.length !== 0 ? <img src={ARTICLE?.fields?.thumbnail} alt="image" className='w-full' /> : <ImagePlaceholer />}
+
+                {/* ai summary */}
                 {/* <AISummary /> */}
-                <div className="text-justify space-y-7 my-10 text-gray-700 leading-10" 
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ARTICLE?.fields?.body) }}
+
+
+                <div className="text-justify space-y-7 my-10 text-gray-700 leading-10"
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(ARTICLE?.fields?.body) }}
                 >
 
                 </div>
@@ -124,6 +172,16 @@ const Article = () => {
     const [ArtIsLoading, setArtIsLoading] = useState(true);
     const [ArtError, setArtError] = useState(false);
 
+    // states for checking article avail. and then setting button color
+    const [isReadLater, setIsReadLater] = useState(false);
+    const [isAvailOffline, setIsAvailOffline] = useState(false);
+
+    const { RL_ARTICLES, OFFLINE_ARTICLES } = useContext(Context);
+
+    const checkAvailability = (id) => {
+        const item = RL_ARTICLES.filter(ele => ele.id === id);
+        return item.length !== 0
+    }
     // fn to fetch article when this page is opened
     const fetchArticle = async () => {
         try {
@@ -131,8 +189,10 @@ const Article = () => {
             let resp = await fetch(`https://content.guardianapis.com/${id}?api-key=${import.meta.env.VITE_API_KEY_GUARDIAN}&show-fields=thumbnail,byline,body`);
             resp = await resp.json();
             setArticle(resp.response.content);
+            setIsReadLater(checkAvailability(id));
             setArtIsLoading(false);
         } catch (error) {
+            console.log(error)
             setArtIsLoading(false)
             setArtError(true);
         }
@@ -151,7 +211,14 @@ const Article = () => {
     return (
         <div className="flex items-start px-40 my-10 justify-between">
             {/* news content on left */}
-            <NewsContent ARTICLE={Article} DISPLAY={!ArtIsLoading && !ArtError} />
+            <NewsContent
+                ARTICLE={Article}
+                isReadLater={isReadLater}
+                setIsReadLater={setIsReadLater}
+                isAvailOffline={isAvailOffline}
+                setIsAvailOffline={setIsAvailOffline}
+                DISPLAY={!ArtIsLoading && !ArtError} 
+                />
 
             {/* notes on right */}
             <NotesSection DISPLAY={!ArtIsLoading && !ArtError} />
