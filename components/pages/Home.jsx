@@ -1,14 +1,20 @@
 // imports
+import { useContext, useState } from "react"
 import DATA from "../../data"
 import CommonHeader from "../ui/CommonHeader"
 import HomeHeader from "../ui/HomeHeader"
 import NewsCard from "../ui/NewsCard"
 import {NewsCardLoading, NewsError, RecommendationError} from "../ui/NewsLoadErr"
 import Pagination from "../ui/Pagination"
+import Context from "../../context/ContextInit"
+import checkAvailability from "../logic/CheckAvailbility"
 
 
 // latest news
 const LatestNews = () => {
+    // context consumption
+    const { RL_ARTICLES, OFFLINE_ARTICLES } = useContext(Context);
+
     return (
         <div className="w-full">
             <CommonHeader
@@ -24,6 +30,8 @@ const LatestNews = () => {
                             key={pos}
                             isLast={pos + 1 ===  DATA.news.response.results.length}
                             icons={true}
+                            isReadLater={checkAvailability(RL_ARTICLES,ele.id)}
+                            isAvailOffline={checkAvailability(OFFLINE_ARTICLES,ele.id)}
                         />
                     })
                 }
@@ -41,6 +49,7 @@ const LatestNews = () => {
 
 // recommended news
 const RecommendedNews = () => {
+    const { RL_ARTICLES, OFFLINE_ARTICLES } = useContext(Context);
     return (
         <div className="w-1/2">
             <CommonHeader
@@ -56,6 +65,8 @@ const RecommendedNews = () => {
                             icons={true}
                             key={pos}
                             isLast={pos + 1 === DATA.news.response.results.length}
+                            isReadLater={checkAvailability(RL_ARTICLES,ele.id)}
+                            isAvailOffline={checkAvailability(OFFLINE_ARTICLES,ele.id)}
                         />
                     }):<p className="text-sm text-gray-400">No recommendations found yet.</p>
                 }

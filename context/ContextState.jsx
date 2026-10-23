@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import Context from "./ContextInit"
 import ReadLater from "../components/logic/ReadLater";
+import AvailOffline from "../components/logic/AvailOffline";
 
 
 const ContextState = ({ children }) => {
@@ -21,9 +22,14 @@ const ContextState = ({ children }) => {
     // state representing article currently being viewed in /article page
     const [CurrentArtcle, setCurrentArtcle] = useState(null);
 
-    // read later function
+    // read later initiation function
     const initiateRL = (isReadLater, setIsReadLater) => {
-        ReadLater(set_RL_ARTICLES, "rl_articles",CurrentArtcle,isReadLater, setIsReadLater)
+        ReadLater(set_RL_ARTICLES, CurrentArtcle, isReadLater, setIsReadLater)
+    }
+
+    // save offline initiation function
+    const initiateSO = (isAvailOffline, setIsAvailOffline, fullArticle) => {
+        AvailOffline(set_OFFLINE_ARTICLES, CurrentArtcle, fullArticle, isAvailOffline, setIsAvailOffline)
     }
 
     // tasks to be performed on very first render
@@ -31,6 +37,7 @@ const ContextState = ({ children }) => {
         // check articles
         CheckArticles("rl_articles")
         CheckArticles("offline_articles")
+        CheckArticles("offline_articles_full")
         CheckArticles("notes_articles")
 
         // set articles
@@ -49,7 +56,8 @@ const ContextState = ({ children }) => {
             set_OFFLINE_ARTICLES,
             set_NOTES_ARTICLES,
             setCurrentArtcle,
-            initiateRL
+            initiateRL,
+            initiateSO
         }}>
             {children}
         </Context.Provider>

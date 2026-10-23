@@ -9,18 +9,22 @@ import { useParams } from 'react-router'
 import ImagePlaceholer from '../ui/ImagePlaceholer'
 import DOMPurify from "dompurify";
 import Context from '../../context/ContextInit'
+import checkAvailability from '../logic/CheckAvailbility'
 
 // news content component
-const NewsContent = ({ 
-    ARTICLE, 
-    DISPLAY, 
-    isReadLater, 
+const NewsContent = ({
+    ARTICLE,
+    DISPLAY,
+    isReadLater,
     setIsReadLater,
     isAvailOffline,
-    setIsAvailOffline 
+    setIsAvailOffline
 }) => {
+
+    // context consumption
     const {
         initiateRL,
+        initiateSO
     } = useContext(Context);
 
     const btnClass = "border border-gray-200 hover:border-gray-400 capitalize text-sm px-3 py-1.5 cursor-pointer flex items-center space-x-2.5 justify-between transition-colors "
@@ -51,6 +55,8 @@ const NewsContent = ({
 
             {/* cta buttons */}
             <div className="flex items-center space-x-3 my-7">
+
+                {/* read later */}
                 <button
                     className={btnClass + `${isReadLater ? "bg-black text-white" : ""}`}
                     onClick={() => {
@@ -65,15 +71,24 @@ const NewsContent = ({
                     <p className="font-medium">{isReadLater ? "Saved" : "read later"}</p>
                 </button>
 
+
+                {/* save offline */}
                 <button
-                    className={btnClass}>
+                    className={btnClass + `${isAvailOffline ? "bg-black text-white" : ""}`}
+                    onClick={() => {
+                        initiateSO(isAvailOffline, setIsAvailOffline, ARTICLE)
+                    }}>
                     <SVG
                         d={DATA.D_Val_Article[1]}
                         className={"size-5"}
                         {...DATA.SVG_PROPS} />
-                    <p className="font-medium">save offline</p>
+                    <p className="font-medium">
+                        {isAvailOffline ? "available" : "save"} offline
+                    </p>
                 </button>
 
+
+                {/* generate ai summary */}
                 <button
                     className={btnClass}>
                     <SVG
@@ -171,10 +186,6 @@ const Article = () => {
 
     const { RL_ARTICLES, OFFLINE_ARTICLES } = useContext(Context);
 
-    const checkAvailability = (id) => {
-        const item = RL_ARTICLES.filter(ele => ele.id === id);
-        return item.length !== 0
-    }
     // fn to fetch article when this page is opened
     const fetchArticle = async () => {
         try {
@@ -182,7 +193,8 @@ const Article = () => {
             let resp = await fetch(`https://content.guardianapis.com/${id}?api-key=${import.meta.env.VITE_API_KEY_GUARDIAN}&show-fields=thumbnail,byline,body`);
             resp = await resp.json();
             setArticle(resp.response.content);
-            setIsReadLater(checkAvailability(id));
+            setIsReadLater(checkAvailability(RL_ARTICLES, id));
+            setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
             setArtIsLoading(false);
         } catch (error) {
             console.log(error)
@@ -210,8 +222,8 @@ const Article = () => {
                 setIsReadLater={setIsReadLater}
                 isAvailOffline={isAvailOffline}
                 setIsAvailOffline={setIsAvailOffline}
-                DISPLAY={!ArtIsLoading && !ArtError} 
-                />
+                DISPLAY={!ArtIsLoading && !ArtError}
+            />
 
             {/* notes on right */}
             <NotesSection DISPLAY={!ArtIsLoading && !ArtError} />
