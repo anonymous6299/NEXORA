@@ -169,7 +169,7 @@ const NotesSection = ({ DISPLAY, Article, setArticle }) => {
         });
         const notesCurrentLen = Article.notes.length
         setArticle(p => ({ ...p, notes: [...p.notes, [3-notesCurrentLen,Note,date]] }))
-        addNotesLS(Article.article.id,[3-notesCurrentLen,Note,date])
+        addNotesLS(Article.article,[3-notesCurrentLen,Note,date])
         setNote("")
     }
 

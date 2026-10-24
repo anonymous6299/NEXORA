@@ -44,7 +44,7 @@ const ContextState = ({ children }) => {
         // set articles
         set_RL_ARTICLES(JSON.parse(localStorage.getItem("rl_articles")));
         set_OFFLINE_ARTICLES(JSON.parse(localStorage.getItem("offline_articles")));
-        set_NOTES_ARTICLES(JSON.parse(localStorage.getItem("notes_articles")));
+        set_NOTES_ARTICLES(JSON.parse(localStorage.getItem("notes")));
     }, [])
 
     return (

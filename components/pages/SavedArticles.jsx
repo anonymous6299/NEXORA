@@ -10,90 +10,94 @@ import Context from "../../context/ContextInit"
 
 
 // read later section
-const ReadLater = ({ARTICLES}) => {
+const ReadLater = ({ ARTICLES }) => {
   return (
     <div>
       {/* header section */}
-      <CommonHeader title={"read later"} length={ARTICLES.length}/>
+      <CommonHeader title={"read later"} length={ARTICLES.length} />
 
       {/* articles */}
-      {ARTICLES.length>0?ARTICLES.map((ele, pos) => {
+      {ARTICLES.length > 0 ? ARTICLES.map((ele, pos) => {
         return <NewsCard
           icons={false}
           news={ele}
           isLast={pos + 1 === DATA.rl_articles.length}
           key={pos}
         />
-      }):<p className="text-sm text-gray-400 py-6">No articles saved for later.</p>}
+      }) : <p className="text-sm text-gray-400 py-6">No articles saved for later.</p>}
 
       {/* pagination */}
       <Pagination
-      display={ARTICLES.length>0}
+        display={ARTICLES.length > 0}
       />
     </div>
-    )
+  )
   // 
 }
 
 
 // available offline section
-const OfflineSec = ({ARTICLES}) => {
+const OfflineSec = ({ ARTICLES }) => {
   return (
     <div>
       {/* header section */}
-      <CommonHeader title={"available offline"} length={ARTICLES.length}/>
+      <CommonHeader title={"available offline"} length={ARTICLES.length} />
 
 
       {/* articles */}
-      {ARTICLES.length>0?ARTICLES.map((ele, pos) => {
+      {ARTICLES.length > 0 ? ARTICLES.map((ele, pos) => {
         return <NewsCard
           icons={false}
           news={ele}
           isLast={pos + 1 === DATA.rl_articles.length}
           key={pos}
         />
-      }):<p className="text-sm text-gray-400 py-6">No articles saved for offline access.</p>}
+      }) : <p className="text-sm text-gray-400 py-6">No articles saved for offline access.</p>}
 
       {/* pagination */}
       <Pagination
-      display={ARTICLES.length>0}     
+        display={ARTICLES.length > 0}
       />
     </div>
-    )
+  )
   // 
 }
 
 
 
 // notes section
-const NotesSec = ({ARTICLES}) => {
+const NotesSec = ({ ARTICLES }) => {
   return (
     <div>
       {/* header section */}
-      <CommonHeader title={"notes"} length={ARTICLES.length}/>
+      <CommonHeader title={"notes"} length={ARTICLES.length} />
 
       {/* articles */}
       {
-        ARTICLES.length>0?ARTICLES.map((ele,pos)=>{
-          return <NotesCard article={ele} key={pos}/>
-        }):<p className="text-sm text-gray-400 py-6">No notes yet. Open any article to add notes.</p>
+        ARTICLES?.length > 0 ? <div>
+          {
+            ARTICLES.map((ele, pos) => {
+              return <div className=""><NotesCard content={ele} key={pos} /></div>
+            })
+          }
+        </div> : <p className="text-sm text-gray-400 py-6">No notes yet. Open any article to add notes.</p>
       }
 
       {/* pagination */}
       <Pagination
-      display={ARTICLES.length>0}
-      Pg_Type={"notes"}/>
+        display={ARTICLES.length > 0}
+        Pg_Type={"notes"} />
     </div>
-    )
+  )
 }
 
 const SavedArticles = () => {
-  const {RL_ARTICLES, OFFLINE_ARTICLES, NOTES_ARTICLES} = useContext(Context)
+  const { RL_ARTICLES, OFFLINE_ARTICLES, NOTES_ARTICLES } = useContext(Context)
   return (
     <div className="w-full px-84 my-10 space-y-16">
-      <ReadLater ARTICLES={RL_ARTICLES}/>
-      <OfflineSec ARTICLES={OFFLINE_ARTICLES}/>
-      <NotesSec ARTICLES={NOTES_ARTICLES}/>
+      <ReadLater ARTICLES={RL_ARTICLES} />
+      <OfflineSec ARTICLES={OFFLINE_ARTICLES} />
+      <NotesSec ARTICLES={NOTES_ARTICLES} />
     </div>
   )
 }
