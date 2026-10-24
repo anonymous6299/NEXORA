@@ -15,7 +15,7 @@ const fetchNotes = (id) => {
 
 
 // add note to local storage function 
-const addNotesLS = (article, note) => {
+const addNotesLS = (article, note,setState) => {
     let Notes = JSON.parse(localStorage.getItem("notes"));
     const data = Notes.find(ele => ele.article.id === article.id);
 
@@ -26,19 +26,21 @@ const addNotesLS = (article, note) => {
         Notes = [...Notes, { article: article, notes: [note] }]
     }
     localStorage.setItem("notes", JSON.stringify(Notes))
+    setState(Notes)
 
 }
 
 
 
 // remove note from local storage function 
-const remNotesLS = (articleID,noteID) => {
+const remNotesLS = (articleID,noteID,setState) => {
     let Notes = JSON.parse(localStorage.getItem("notes"));
     const data = Notes.find(ele => ele.article.id === articleID);
 
     Notes[Notes.indexOf(data)].notes = Notes[Notes.indexOf(data)].notes.filter(ele => ele[0] !== noteID)
 
     localStorage.setItem("notes", JSON.stringify(Notes))
+    setState(Notes)
 
 }
 

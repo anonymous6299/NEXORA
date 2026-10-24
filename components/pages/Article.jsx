@@ -160,6 +160,8 @@ const NotesSection = ({ DISPLAY, Article, setArticle }) => {
     // current note state and cross icon display state
     const [Note, setNote] = useState("");
 
+    // context consumption
+    const {set_NOTES_ARTICLES} = useContext(Context)
     // fn to add note
     const SubmitNote = () => {
         const date = new Date().toLocaleDateString("en-IN", {
@@ -169,13 +171,13 @@ const NotesSection = ({ DISPLAY, Article, setArticle }) => {
         });
         const notesCurrentLen = Article.notes.length
         setArticle(p => ({ ...p, notes: [...p.notes, [3-notesCurrentLen,Note,date]] }))
-        addNotesLS(Article.article,[3-notesCurrentLen,Note,date])
+        addNotesLS(Article.article,[3-notesCurrentLen,Note,date],set_NOTES_ARTICLES)
         setNote("")
     }
 
     const removeNote = (key) => {
         setArticle(p => ({ ...p, notes: p.notes.filter(ele => ele[0] !== key) }))
-        remNotesLS(Article.article.id,key)
+        remNotesLS(Article.article.id,key,set_NOTES_ARTICLES)
     }
     // states
     return (
