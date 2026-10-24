@@ -59,7 +59,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/sport',
           pillarName: 'Sport',
-          actions: []
         },
         {
           id: 'politics/live/2026/oct/21/jackdaw-gasfield-labour-andy-burnham-zack-polanski-uk-politics-latest-news',
@@ -78,7 +77,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/news',
           pillarName: 'News',
-          actions: []
         },
         {
           id: 'business/live/2026/oct/21/uk-inflation-jump-rising-motor-fuels-cost-jackdaw-gas-field-latest-news-updates',
@@ -97,7 +95,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/news',
           pillarName: 'News',
-          actions: []
         },
         {
           id: 'politics/2026/oct/21/bereaved-civil-service-families-tax-bills-pension-scheme-delays-capita-death-in-benefit-claims',
@@ -116,7 +113,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/news',
           pillarName: 'News',
-          actions: []
         },
         {
           id: 'us-news/ng-interactive/2026/oct/21/louisiana-eviction-courts-system',
@@ -135,7 +131,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/news',
           pillarName: 'News',
-          actions: []
         },
         {
           id: 'football/2026/oct/21/manchester-city-fifa-rules-grassroots-philipp-lahm',
@@ -154,7 +149,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/sport',
           pillarName: 'Sport',
-          actions: []
         },
         {
           id: 'us-news/ng-interactive/2026/oct/21/louisiana-justice-of-peace-courts-methodology',
@@ -173,7 +167,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/news',
           pillarName: 'News',
-          actions: []
         },
         {
           id: 'sport/2026/oct/21/austin-gp-about-much-more-than-potential-kimi-antonelli-first-f1-world-title',
@@ -192,7 +185,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/sport',
           pillarName: 'Sport',
-          actions: []
         },
         {
           id: 'global-development/2026/oct/21/el-salvador-crackdown-president-bukele-mass-arrest-allegations-torture-killing-prison',
@@ -211,7 +203,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/news',
           pillarName: 'News',
-          actions: []
         },
         {
           id: 'uk-news/2026/oct/21/stratford-internationalinternational-trains-budget-boost',
@@ -230,7 +221,6 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/news',
           pillarName: 'News',
-          actions: []
         }
       ]
     }
@@ -306,9 +296,9 @@ const DATA = {
     }
   ]
 }
-const initActions = (data) => {
+const initNotes = (data) => {
   const resp = data.map((ele, pos) => {
-    return { ...ele, actions: [] }
+    return { ...el }
   })
 
   return resp

@@ -8,6 +8,7 @@ import {NewsCardLoading, NewsError, RecommendationError} from "../ui/NewsLoadErr
 import Pagination from "../ui/Pagination"
 import Context from "../../context/ContextInit"
 import checkAvailability from "../logic/CheckAvailbility"
+import { fetchNotes } from "../logic/Notes"
 
 
 // latest news
@@ -32,6 +33,7 @@ const LatestNews = () => {
                             icons={true}
                             isReadLater={checkAvailability(RL_ARTICLES,ele.id)}
                             isAvailOffline={checkAvailability(OFFLINE_ARTICLES,ele.id)}
+                            NotesPresent={fetchNotes(ele.id).length!==0}
                         />
                     })
                 }
@@ -67,6 +69,7 @@ const RecommendedNews = () => {
                             isLast={pos + 1 === DATA.news.response.results.length}
                             isReadLater={checkAvailability(RL_ARTICLES,ele.id)}
                             isAvailOffline={checkAvailability(OFFLINE_ARTICLES,ele.id)}
+                            NotesPresent={fetchNotes(ele.id).length!==0}
                         />
                     }):<p className="text-sm text-gray-400">No recommendations found yet.</p>
                 }

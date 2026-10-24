@@ -39,6 +39,7 @@ const ContextState = ({ children }) => {
         CheckArticles("offline_articles")
         CheckArticles("offline_articles_full")
         CheckArticles("notes_articles")
+        CheckArticles("notes")
 
         // set articles
         set_RL_ARTICLES(JSON.parse(localStorage.getItem("rl_articles")));

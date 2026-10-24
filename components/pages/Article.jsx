@@ -11,6 +11,8 @@ import DOMPurify from "dompurify";
 import Context from '../../context/ContextInit'
 import checkAvailability from '../logic/CheckAvailbility'
 import GenerateAISummary from '../logic/AISummary'
+import { addNotesLS, fetchNotes, remNotesLS } from '../logic/Notes'
+import ArticleNote from '../ui/ArticleNote'
 // news content component
 const NewsContent = ({
     ARTICLE,
@@ -129,11 +131,11 @@ const NewsContent = ({
             {/* image and content */}
             <div>
                 {/* article image */}
-                {typeof ARTICLE?.fields?.thumbnail === "string" && ARTICLE?.fields?.thumbnail.length !== 0 ? <img 
-                ref={imgRef} 
-                src={ARTICLE?.fields?.thumbnail} 
-                alt="image" 
-                className='w-full' /> : <ImagePlaceholer />}
+                {typeof ARTICLE?.fields?.thumbnail === "string" && ARTICLE?.fields?.thumbnail.length !== 0 ? <img
+                    ref={imgRef}
+                    src={ARTICLE?.fields?.thumbnail}
+                    alt="image"
+                    className='w-full' /> : <ImagePlaceholer />}
 
                 {/* ai summary */}
                 <AISummary
@@ -154,30 +156,43 @@ const NewsContent = ({
 
 
 // notes content component
-const NotesSection = ({ DISPLAY }) => {
-    // states
+const NotesSection = ({ DISPLAY, Article, setArticle }) => {
+    // current note state and cross icon display state
     const [Note, setNote] = useState("");
-    const [DeleteNoteDisplay, setDeleteNoteDisplay] = useState(false);
+
+    // fn to add note
+    const SubmitNote = () => {
+        const date = new Date().toLocaleDateString("en-IN", {
+            day: "numeric",
+            month: "long",
+            year: "numeric"
+        });
+        const notesCurrentLen = Article.notes.length
+        setArticle(p => ({ ...p, notes: [...p.notes, [3-notesCurrentLen,Note,date]] }))
+        addNotesLS(Article.article.id,[3-notesCurrentLen,Note,date])
+        setNote("")
+    }
+
+    const removeNote = (key) => {
+        setArticle(p => ({ ...p, notes: p.notes.filter(ele => ele[0] !== key) }))
+        remNotesLS(Article.article.id,key)
+    }
+    // states
     return (
         <div className={`${DISPLAY ? "" : "hidden"} border border-gray-100 p-5 space-y-4`}>
             {/* heading and count*/}
             <div className="flex items-center space-x-3">
                 <p className="uppercase text-gray-500 text-sm font-semibold tracking-wider">notes</p>
-                <p className='text-gray-300 font-normal text-sm'>( 1 / 3 )</p>
+                <p className='text-gray-300 font-normal text-sm'>( {Article.notes.length} / 3 )</p>
             </div>
 
 
             {/* notes */}
-            <div
-                className='bg-gray-100 border border-gray-100 p-3 space-y-3 w-76'
-                onMouseEnter={() => { setDeleteNoteDisplay(true) }}
-                onMouseLeave={() => { setDeleteNoteDisplay(false) }}>
-                <p className='text-sm text-gray-800'>Interesting: monitoring body gets actual enforcement authority, not just advisory.</p>
-                <div className="flex justify-between items-center">
-                    <p className='text-xs text-gray-400'>September 1, 2026</p>
-                    <SVG className={`size-3 text-gray-400 hover:text-black cursor-pointer ${DeleteNoteDisplay ? "" : "hidden"}`} d={"M6 18 18 6M6 6l12 12"} {...DATA.SVG_PROPS} />
-                </div>
-            </div>
+            {
+                Article.notes.length > 0 ? Article.notes.map((ele, pos) => {
+                    return <ArticleNote content={ele} key={pos} removeNote={removeNote} />
+                }) : <p className='text-sm text-gray-400 italic w-76'>No notes yet.</p>
+            }
 
 
             {/* note input */}
@@ -189,12 +204,17 @@ const NotesSection = ({ DISPLAY }) => {
                     className='w-full focus:outline-none resize-none text-sm px-3 py-2.5 border border-transparent focus:border-gray-300 transition-all h-full placeholder:text-gray-400/80'
                     placeholder='Add a note...'
                     value={Note}
-                    onChange={(e) => { setNote(e.target.value) }}>
+                    onChange={e => setNote(e.target.value)}
+                >
                 </textarea>
 
                 <div className='flex justify-between items-center bg-gray-100/80 px-3 py-2'>
-                    <p className='text-xs text-gray-400'>x remaining</p>
-                    <button className='bg-black disabled:opacity-30 text-white capitalize px-3 py-1.5 text-xs cursor-pointer disabled:cursor-not-allowed' disabled={Note === ""}>save</button>
+                    <p className='text-xs text-gray-400'>{3 - Article.notes.length} remaining</p>
+                    <button
+                        className='bg-black disabled:opacity-30 text-white capitalize px-3 py-1.5 text-xs cursor-pointer disabled:cursor-not-allowed'
+                        disabled={Article.notes.length === 3}
+                        onClick={SubmitNote}
+                    >save</button>
                 </div>
             </div>
         </div>
@@ -209,7 +229,7 @@ const Article = () => {
     const id = params['*'];
 
     // article and component display states
-    const [Article, setArticle] = useState(null);
+    const [Article, setArticle] = useState({ article: {}, notes: [] });
     const [ArtIsLoading, setArtIsLoading] = useState(true);
     const [ArtError, setArtError] = useState(false);
 
@@ -217,6 +237,7 @@ const Article = () => {
     const [isReadLater, setIsReadLater] = useState(false);
     const [isAvailOffline, setIsAvailOffline] = useState(false);
 
+    // context consumption
     const { RL_ARTICLES, OFFLINE_ARTICLES } = useContext(Context);
 
     // fn to fetch article when this page is opened
@@ -225,12 +246,11 @@ const Article = () => {
             setArtIsLoading(true)
             let resp = await fetch(`https://content.guardianapis.com/${id}?api-key=${import.meta.env.VITE_API_KEY_GUARDIAN}&show-fields=thumbnail,byline,body`);
             resp = await resp.json();
-            setArticle(resp.response.content);
+            setArticle({ article: resp.response.content, notes: fetchNotes(resp.response.content.id) });
             setIsReadLater(checkAvailability(RL_ARTICLES, id));
             setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
             setArtIsLoading(false);
         } catch (error) {
-            console.log(error)
             setArtIsLoading(false)
             setArtError(true);
         }
@@ -251,7 +271,7 @@ const Article = () => {
         <div className="flex items-start px-40 my-10 justify-between">
             {/* news content on left */}
             <NewsContent
-                ARTICLE={Article}
+                ARTICLE={Article.article}
                 isReadLater={isReadLater}
                 setIsReadLater={setIsReadLater}
                 isAvailOffline={isAvailOffline}
@@ -260,7 +280,13 @@ const Article = () => {
             />
 
             {/* notes on right */}
-            <NotesSection DISPLAY={!ArtIsLoading && !ArtError} />
+            <NotesSection
+                DISPLAY={!ArtIsLoading && !ArtError}
+                Article={Article}
+                setArticle={setArticle}
+            />
+
+            {/* loading and error */}
             <ArticleLoading DISPLAY={ArtIsLoading} />
             <NewsError DISPLAY={ArtError} retry={RetryFn} />
         </div>

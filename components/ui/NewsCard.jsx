@@ -6,7 +6,7 @@ import { useContext } from "react";
 import Context from "../../context/ContextInit";
 
 // news card
-const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline }) => {
+const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline,NotesPresent }) => {
     // hook init
     const nav = useNavigate();
     const { setCurrentArtcle } = useContext(Context);
@@ -63,11 +63,11 @@ const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline }) =>
                                 {...DATA.SVG_PROPS}
                             />:""
                             }
-                            {/* <SVG
+                            {NotesPresent?<SVG
                                 d={DATA.D_Val_Action.notes}
                                 className={"size-5.5"}
                                 {...DATA.SVG_PROPS}
-                            /> */}
+                            />:""}
                         </div>
                     </div>
                 </div>
