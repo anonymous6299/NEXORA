@@ -177,7 +177,7 @@ const NotesSection = ({ DISPLAY, Article, setArticle }) => {
 
     const removeNote = (key) => {
         setArticle(p => ({ ...p, notes: p.notes.filter(ele => ele[0] !== key) }))
-        remNotesLS(Article.article.id,key,set_NOTES_ARTICLES)
+        remNotesLS(Article.article.id,set_NOTES_ARTICLES)
     }
     // states
     return (
@@ -214,7 +214,7 @@ const NotesSection = ({ DISPLAY, Article, setArticle }) => {
                     <p className='text-xs text-gray-400'>{3 - Article.notes.length} remaining</p>
                     <button
                         className='bg-black disabled:opacity-30 text-white capitalize px-3 py-1.5 text-xs cursor-pointer disabled:cursor-not-allowed'
-                        disabled={Article.notes.length === 3}
+                        disabled={Article.notes.length === 3 || Note===""}
                         onClick={SubmitNote}
                     >save</button>
                 </div>

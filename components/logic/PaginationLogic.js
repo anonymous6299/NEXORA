@@ -1,12 +1,14 @@
 
 
-const NotesPagination = (SetState,NavType) => {
-    if (NavType==="n") {
-        SetState(p=>p+1)
+const NotesPagination = (SetState, NavType) => {
+    if (NavType === "n") {
+        SetState(p => p + 1)
     } else {
-        SetState(p=>p-1)
+        SetState(p => p - 1)
     }
-    
+
 }
 
-export {NotesPagination}
+
+
+export { NotesPagination }

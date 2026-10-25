@@ -33,14 +33,12 @@ const addNotesLS = (article, note,setState) => {
 
 
 // remove note from local storage function 
-const remNotesLS = (articleID,noteID,setState) => {
+const remNotesLS = (articleID,setState) => {
     let Notes = JSON.parse(localStorage.getItem("notes"));
-    const data = Notes.find(ele => ele.article.id === articleID);
+    const data = Notes.filter(ele => ele.article.id !== articleID);
 
-    Notes[Notes.indexOf(data)].notes = Notes[Notes.indexOf(data)].notes.filter(ele => ele[0] !== noteID)
-
-    localStorage.setItem("notes", JSON.stringify(Notes))
-    setState(Notes)
+    localStorage.setItem("notes", JSON.stringify(data))
+    setState(data)
 
 }
 

@@ -221,6 +221,239 @@ const DATA = {
           isHosted: false,
           pillarId: 'pillar/news',
           pillarName: 'News',
+        }, {
+          "id": "world/2026/oct/24/israel-soldiers-raze-west-bank-neighbourhood-hebron-families-from-homes",
+          "type": "article",
+          "sectionId": "world",
+          "sectionName": "World news",
+          "webPublicationDate": "2026-10-25T06:24:46Z",
+          "webTitle": "Israeli soldiers raze neighbourhood in Hebron, driving families from homes",
+          "webUrl": "https://www.theguardian.com/world/2026/oct/24/israel-soldiers-raze-west-bank-neighbourhood-hebron-families-from-homes",
+          "apiUrl": "https://content.guardianapis.com/world/2026/oct/24/israel-soldiers-raze-west-bank-neighbourhood-hebron-families-from-homes",
+          "fields": {
+            "trailText": "PM Benjamin Netanyahu vows ‘to destroy this place’ in retaliation for militant attack on army checkpoint",
+            "byline": "Julian Borger in Jerusalem",
+            "thumbnail": "https://media.guim.co.uk/070c0491a86f1916db6f7b08a147bb7b4fa7f848/458_0_4583_3667/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/news",
+          "pillarName": "News"
+        },
+        {
+          "id": "tv-and-radio/2026/oct/25/tv-tonight-a-horny-drama-stuffed-with-sex-in-a-car-toilet-and-city-farm",
+          "type": "article",
+          "sectionId": "tv-and-radio",
+          "sectionName": "Television & radio",
+          "webPublicationDate": "2026-10-25T06:15:54Z",
+          "webTitle": "TV tonight: a horny drama stuffed with sex in a car, toilet and … city farm ",
+          "webUrl": "https://www.theguardian.com/tv-and-radio/2026/oct/25/tv-tonight-a-horny-drama-stuffed-with-sex-in-a-car-toilet-and-city-farm",
+          "apiUrl": "https://content.guardianapis.com/tv-and-radio/2026/oct/25/tv-tonight-a-horny-drama-stuffed-with-sex-in-a-car-toilet-and-city-farm",
+          "fields": {
+            "trailText": "Adultery is a moreish series starring Romola Garai and Dominic Cooper. Plus, hit gang thriller This City Is Ours is back. Here’s what to watch this evening",
+            "byline": "Hollie Richardson, Phil Harrison, Graeme Virtue, Jack Seale and Ellen E Jones",
+            "thumbnail": "https://media.guim.co.uk/e473d90ec31c7bdfaab061f06770c712e0bcb6aa/757_140_7665_6132/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/arts",
+          "pillarName": "Arts"
+        },
+        {
+          "id": "uk-news/2026/oct/25/emirati-linked-firms-manchester-land",
+          "type": "article",
+          "sectionId": "uk-news",
+          "sectionName": "UK news",
+          "webPublicationDate": "2026-10-25T06:00:55Z",
+          "webTitle": "Emirati-linked firms’ ownership of Manchester land ‘up 39%’ in ten years",
+          "webUrl": "https://www.theguardian.com/uk-news/2026/oct/25/emirati-linked-firms-manchester-land",
+          "apiUrl": "https://content.guardianapis.com/uk-news/2026/oct/25/emirati-linked-firms-manchester-land",
+          "fields": {
+            "trailText": "Economic ties face scrutiny after scandal over Manchester City’s financial rules",
+            "byline": "Carmen Aguilar García, Michael Goodier, Josh Halliday and Philip McMahon",
+            "thumbnail": "https://media.guim.co.uk/f548fe402a84152e9358e51424f2d696202430cb/720_0_7200_5760/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/news",
+          "pillarName": "News"
+        },
+        {
+          "id": "science/2026/oct/25/scientists-rediscover-ancient-roman-colour-changing-glass",
+          "type": "article",
+          "sectionId": "science",
+          "sectionName": "Science",
+          "webPublicationDate": "2026-10-25T06:00:55Z",
+          "webTitle": "‘It’s magic’: scientists rediscover how to make ancient Roman colour-changing glass",
+          "webUrl": "https://www.theguardian.com/science/2026/oct/25/scientists-rediscover-ancient-roman-colour-changing-glass",
+          "apiUrl": "https://content.guardianapis.com/science/2026/oct/25/scientists-rediscover-ancient-roman-colour-changing-glass",
+          "fields": {
+            "trailText": "Exclusive: Optical engineering that went into 1,600-year-old Lycurgus Cup has baffled experts for centuries",
+            "byline": "Dalya Alberge",
+            "thumbnail": "https://media.guim.co.uk/5adc5850e4e7c935070f9c27e018c2b8db42ba73/0_897_4512_3610/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/news",
+          "pillarName": "News"
+        },
+        {
+          "id": "food/2026/oct/25/outlier-glasgow-g1-grace-dent-restaurant-review",
+          "type": "article",
+          "sectionId": "food",
+          "sectionName": "Food",
+          "webPublicationDate": "2026-10-25T06:00:55Z",
+          "webTitle": "Outlier, Glasgow G1: ‘This kind of carefully orchestrated can’t-be-arsedness is really quite magical’ – restaurant review | Grace Dent on restaurants",
+          "webUrl": "https://www.theguardian.com/food/2026/oct/25/outlier-glasgow-g1-grace-dent-restaurant-review",
+          "apiUrl": "https://content.guardianapis.com/food/2026/oct/25/outlier-glasgow-g1-grace-dent-restaurant-review",
+          "fields": {
+            "trailText": "You cannot fake fabulous by simply buying in cool crockery and a freezer full of someone else’s pastry",
+            "byline": "Grace Dent",
+            "thumbnail": "https://media.guim.co.uk/2749104c9c31ec699d82bd4ab4a43a46173c2355/0_0_5840_4672/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/lifestyle",
+          "pillarName": "Lifestyle"
+        },
+        {
+          "id": "news/ng-interactive/2026/oct/25/thats-the-way-the-city-works-how-the-uae-changed-the-face-of-andy-burnhams-manchester",
+          "type": "interactive",
+          "sectionId": "news",
+          "sectionName": "News",
+          "webPublicationDate": "2026-10-25T06:00:54Z",
+          "webTitle": "‘That’s the way the city works’: how the UAE changed the face of Andy Burnham’s Manchester",
+          "webUrl": "https://www.theguardian.com/news/ng-interactive/2026/oct/25/thats-the-way-the-city-works-how-the-uae-changed-the-face-of-andy-burnhams-manchester",
+          "apiUrl": "https://content.guardianapis.com/news/ng-interactive/2026/oct/25/thats-the-way-the-city-works-how-the-uae-changed-the-face-of-andy-burnhams-manchester",
+          "fields": {
+            "trailText": "The story of the emirates’ presence in Manchester winds from the Arab Spring to some of the most deprived places in England – with complicated results\u003Cbr\u003E\u003Cbr\u003E",
+            "byline": "Josh Halliday",
+            "thumbnail": "https://media.guim.co.uk/5d18e78d301848ee476161295fad0e090dc4951a/0_0_5000_4000/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/news",
+          "pillarName": "News"
+        },
+        {
+          "id": "world/2026/oct/25/gaza-suffering-campaign-fodder-palestinians-fear-worst-israel-election",
+          "type": "article",
+          "sectionId": "world",
+          "sectionName": "World news",
+          "webPublicationDate": "2026-10-25T06:00:54Z",
+          "webTitle": "‘Gaza’s suffering has become campaign fodder’: Palestinians fear the worst from Israel election",
+          "webUrl": "https://www.theguardian.com/world/2026/oct/25/gaza-suffering-campaign-fodder-palestinians-fear-worst-israel-election",
+          "apiUrl": "https://content.guardianapis.com/world/2026/oct/25/gaza-suffering-campaign-fodder-palestinians-fear-worst-israel-election",
+          "fields": {
+            "trailText": "Humanitarian catastrophe largely ignored as rivals Gadi Eisenkot and Benjamin Netanyahu vow to end Hamas rule",
+            "byline": "Seham Tantesh in Gaza and Lorenzo Tondo",
+            "thumbnail": "https://media.guim.co.uk/06fe9fcd10ec9a5f068328aac3ae4eacff597b5a/326_0_4141_3313/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/news",
+          "pillarName": "News"
+        },
+        {
+          "id": "lifeandstyle/2026/oct/25/gave-ex-house-half-savings-now-resentful",
+          "type": "article",
+          "sectionId": "lifeandstyle",
+          "sectionName": "Life and style",
+          "webPublicationDate": "2026-10-25T06:00:54Z",
+          "webTitle": "I gave my ex our house and half my savings, but now I feel resentful | Ask Annalisa Barbieri",
+          "webUrl": "https://www.theguardian.com/lifeandstyle/2026/oct/25/gave-ex-house-half-savings-now-resentful",
+          "apiUrl": "https://content.guardianapis.com/lifeandstyle/2026/oct/25/gave-ex-house-half-savings-now-resentful",
+          "fields": {
+            "trailText": "Your feelings are understandable. Exploring and accepting them may help you move on",
+            "byline": "Annalisa Barbieri",
+            "thumbnail": "https://media.guim.co.uk/b26725319d3e4dc03ff9509367c9ef8cc66f9e35/1304_0_7808_6250/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/lifestyle",
+          "pillarName": "Lifestyle"
+        },
+        {
+          "id": "stage/2026/oct/25/derren-brown-only-human-review-gasp-inducing-stunts-apollo-london",
+          "type": "article",
+          "sectionId": "stage",
+          "sectionName": "Stage",
+          "webPublicationDate": "2026-10-25T06:00:53Z",
+          "webTitle": "Derren Brown turns into Nostradamus – and I predict you’ll submit to one gasp-inducing stunt after another",
+          "webUrl": "https://www.theguardian.com/stage/2026/oct/25/derren-brown-only-human-review-gasp-inducing-stunts-apollo-london",
+          "apiUrl": "https://content.guardianapis.com/stage/2026/oct/25/derren-brown-only-human-review-gasp-inducing-stunts-apollo-london",
+          "fields": {
+            "trailText": "Prophecies are impossibly fulfilled by the superstar who takes his cue from the legendary French seer in his show Only Human",
+            "byline": "Brian Logan",
+            "thumbnail": "https://media.guim.co.uk/b173bf590e9950f4523c1b09f5ee968cd828d7db/443_0_2851_2281/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/arts",
+          "pillarName": "Arts"
+        },
+        {
+          "id": "australia-news/2026/oct/25/a-place-in-the-history-books-but-no-toastie-my-time-on-board-western-sydney-airports-inaugural-flight",
+          "type": "article",
+          "sectionId": "australia-news",
+          "sectionName": "Australia news",
+          "webPublicationDate": "2026-10-25T05:31:47Z",
+          "webTitle": "A place in the history books but no toastie: my time on board Western Sydney airport’s inaugural flight",
+          "webUrl": "https://www.theguardian.com/australia-news/2026/oct/25/a-place-in-the-history-books-but-no-toastie-my-time-on-board-western-sydney-airports-inaugural-flight",
+          "apiUrl": "https://content.guardianapis.com/australia-news/2026/oct/25/a-place-in-the-history-books-but-no-toastie-my-time-on-board-western-sydney-airports-inaugural-flight",
+          "fields": {
+            "trailText": "The mood is jubilant on the Airbus A320 Neo as aviation enthusiasts and locals thrill at their place on the first flight",
+            "byline": "Catie McLeod Consumer affairs reporter",
+            "thumbnail": "https://media.guim.co.uk/c4ef6adb10d6caa82c95f00ff7690d2a4237574b/126_0_3718_2976/500.jpg"
+          },
+          "isHosted": false,
+          "pillarId": "pillar/news",
+          "pillarName": "News"
+        },
+        {
+          id: 'us-news/ng-interactive/2026/oct/21/louisiana-eviction-courts-system',
+          type: 'interactive',
+          sectionId: 'us-news',
+          sectionName: 'US news',
+          webPublicationDate: '2026-10-21T11:00:04Z',
+          webTitle: '‘Sham tribunal’: one family’s battle with Louisiana’s ‘feudal’ eviction courts',
+          webUrl: 'https://www.theguardian.com/us-news/ng-interactive/2026/oct/21/louisiana-eviction-courts-system',
+          apiUrl: 'https://content.guardianapis.com/us-news/ng-interactive/2026/oct/21/louisiana-eviction-courts-system',
+          fields: {
+            trailText: 'In rural Louisiana, eviction hearings are held at kitchen tables and other unorthodox venues – and many justices have little legal training',
+            byline: 'Oliver Laughland and Will Craft with photography by Annie Flanagan',
+            thumbnail: 'https://media.guim.co.uk/28744338567c9a6ace41dba2b08cef8fb86cd826/17_0_3167_2534/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
+        },
+        {
+          id: 'football/2026/oct/21/manchester-city-fifa-rules-grassroots-philipp-lahm',
+          type: 'article',
+          sectionId: 'football',
+          sectionName: 'Football',
+          webPublicationDate: '2026-10-21T11:00:04Z',
+          webTitle: 'Football must not be detached from its roots as was the case with Manchester City | Philipp Lahm',
+          webUrl: 'https://www.theguardian.com/football/2026/oct/21/manchester-city-fifa-rules-grassroots-philipp-lahm',
+          apiUrl: 'https://content.guardianapis.com/football/2026/oct/21/manchester-city-fifa-rules-grassroots-philipp-lahm',
+          fields: {
+            trailText: 'City behaved much like other top clubs but their rule-breaking deserves to be punished. The Bundesliga, where members have a controlling stake, can show the way forward',
+            byline: 'Philipp Lahm',
+            thumbnail: 'https://media.guim.co.uk/e3291a2244a700715dd2419646e7512cb1e4cb12/324_0_4139_3312/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/sport',
+          pillarName: 'Sport',
+        },
+        {
+          id: 'us-news/ng-interactive/2026/oct/21/louisiana-justice-of-peace-courts-methodology',
+          type: 'interactive',
+          sectionId: 'us-news',
+          sectionName: 'US news',
+          webPublicationDate: '2026-10-21T11:00:03Z',
+          webTitle: 'How the Guardian reported on Louisiana’s justice of the peace courts',
+          webUrl: 'https://www.theguardian.com/us-news/ng-interactive/2026/oct/21/louisiana-justice-of-peace-courts-methodology',
+          apiUrl: 'https://content.guardianapis.com/us-news/ng-interactive/2026/oct/21/louisiana-justice-of-peace-courts-methodology',
+          fields: {
+            trailText: 'Reporters scanned more than 11,000 pages and processed thousands of hand-written and often incomplete records',
+            byline: 'Will Craft and Tom Richards with Rachel Shur',
+            thumbnail: 'https://media.guim.co.uk/85adc058493b4219f688bdd21b2be358213d1a14/0_173_3316_2654/500.jpg'
+          },
+          isHosted: false,
+          pillarId: 'pillar/news',
+          pillarName: 'News',
         }
       ]
     }
@@ -297,12 +530,8 @@ const DATA = {
   ]
 }
 const initNotes = (data) => {
-  const resp = data.map((ele, pos) => {
-    return { ...el }
-  })
+  const resp = data.map(ele => ({ ...ele, notes: [] }))
 
   return resp
 }
-
-
 export default DATA
