@@ -4,15 +4,16 @@ import SVG from "./SVG";
 import DATA from '../../data'
 import { useContext } from "react";
 import Context from "../../context/ContextInit";
+import { IncreaseData } from "../logic/Recommendations";
 
 // news card
-const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline,NotesPresent }) => {
+const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline, NotesPresent }) => {
     // hook init
     const nav = useNavigate();
-    const { setCurrentArtcle } = useContext(Context);
+    const { setCurrentArtcle, Recommendations, setRecommendations } = useContext(Context);
     return (
         <>
-            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news) }}>
+            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); setRecommendations(IncreaseData(news.sectionName.toLowerCase(), Recommendations)) }}>
 
 
                 {/* image  */}
@@ -51,24 +52,24 @@ const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline,Notes
 
                         {/* info icons */}
                         <div className={`flex justify-between items-center text-gray-400 space-x-3 ${!icons ? "hidden" : ""}`}>
-                            {isReadLater?<SVG
+                            {isReadLater ? <SVG
                                 d={DATA.D_Val_Action.bookmark}
                                 className={"size-5"}
                                 {...DATA.SVG_PROPS}
                                 fill={"#99a1af"}
-                            />:""
+                            /> : ""
                             }
-                            {isAvailOffline?<SVG
+                            {isAvailOffline ? <SVG
                                 d={DATA.D_Val_Action.download}
                                 className={"size-5.5"}
                                 {...DATA.SVG_PROPS}
-                            />:""
+                            /> : ""
                             }
-                            {NotesPresent?<SVG
+                            {NotesPresent ? <SVG
                                 d={DATA.D_Val_Action.notes}
                                 className={"size-5.5"}
                                 {...DATA.SVG_PROPS}
-                            />:""}
+                            /> : ""}
                         </div>
                     </div>
                 </div>

@@ -66,7 +66,7 @@ const RecommendedNews = ({ ARTICLES }) => {
                             size={"xs"}
                             icons={true}
                             key={pos}
-                            isLast={pos + 1 === DATA.news.response.results.length}
+                            // isLast={pos + 1 === DATA.news.response.results.length}
                             isReadLater={checkAvailability(RL_ARTICLES, ele.id)}
                             isAvailOffline={checkAvailability(OFFLINE_ARTICLES, ele.id)}
                             NotesPresent={fetchNotes(ele.id).length !== 0}
@@ -105,7 +105,7 @@ const Home = () => {
             {/* middle section */}
             <div className="flex justify-between items-start space-x-20 border-b border-gray-200 min-h-135">
                 <LatestNews ARTICLES={ThisArticles} />
-                <RecommendedNews ARTICLES={ThisArticles} />
+                <RecommendedNews ARTICLES={DATA.news.response.results.slice(0,6)} />
             </div>
 
             {/* bottom pagination */}

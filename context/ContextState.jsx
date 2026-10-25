@@ -32,6 +32,8 @@ const ContextState = ({ children }) => {
         AvailOffline(set_OFFLINE_ARTICLES, CurrentArtcle, fullArticle, isAvailOffline, setIsAvailOffline)
     }
 
+    // state for storing recommendations data
+    const [Recommendations, setRecommendations] = useState([]);
     // tasks to be performed on very first render
     useEffect(() => {
         // check articles
@@ -40,11 +42,13 @@ const ContextState = ({ children }) => {
         CheckArticles("offline_articles_full")
         CheckArticles("notes_articles")
         CheckArticles("notes")
+        CheckArticles("recommendations_data")
 
         // set articles
         set_RL_ARTICLES(JSON.parse(localStorage.getItem("rl_articles")));
         set_OFFLINE_ARTICLES(JSON.parse(localStorage.getItem("offline_articles")));
         set_NOTES_ARTICLES(JSON.parse(localStorage.getItem("notes")));
+        setRecommendations(JSON.parse(localStorage.getItem("recommendations_data")));
     }, [])
 
     return (
@@ -53,6 +57,8 @@ const ContextState = ({ children }) => {
             OFFLINE_ARTICLES,
             NOTES_ARTICLES,
             CurrentArtcle,
+            Recommendations,
+            setRecommendations,
             set_RL_ARTICLES,
             set_OFFLINE_ARTICLES,
             set_NOTES_ARTICLES,
