@@ -18,7 +18,7 @@ const NavBar = () => {
     return (
 
         // parent nav
-        <div className="flex justify-between items-center w-full border-b border-gray-100 py-5 px-40">
+        <div className="flex justify-between items-center w-full border-b border-gray-100 py-5 px-40 sticky top-0 bg-white">
             {/* brand */}
             <Link to={"/"}><p className="uppercase text-xl brand font-bold font-display">nexora</p></Link>
             

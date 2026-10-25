@@ -181,7 +181,7 @@ const NotesSection = ({ DISPLAY, Article, setArticle }) => {
     }
     // states
     return (
-        <div className={`${DISPLAY ? "" : "hidden"} border border-gray-100 p-5 space-y-4`}>
+        <div className={`${DISPLAY ? "" : "hidden"} border border-gray-100 p-5 space-y-4 sticky top-28`}>
             {/* heading and count*/}
             <div className="flex items-center space-x-3">
                 <p className="uppercase text-gray-500 text-sm font-semibold tracking-wider">notes</p>

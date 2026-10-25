@@ -7,13 +7,13 @@ import Context from "../../context/ContextInit";
 import { IncreaseData } from "../logic/Recommendations";
 
 // news card
-const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline, NotesPresent }) => {
+const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline, NotesPresent,isRecommended }) => {
     // hook init
     const nav = useNavigate();
-    const { setCurrentArtcle, Recommendations, setRecommendations } = useContext(Context);
+    const { setCurrentArtcle } = useContext(Context);
     return (
         <>
-            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); setRecommendations(IncreaseData(news.sectionName.toLowerCase(), Recommendations)) }}>
+            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); IncreaseData(news.sectionName.toLowerCase()) }}>
 
 
                 {/* image  */}
@@ -25,8 +25,18 @@ const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline, Note
 
 
                     {/* topic */}
-                    <p className="uppercase text-xs font-medium tracking-widest text-gray-400">
-                        {news?.sectionName}</p>
+                    <div className="flex items-center space-x-2">
+                        <p className="uppercase text-xs font-medium tracking-widest text-gray-400">
+                            {news?.sectionName}</p>
+                        <div className={`border-l-2 border-black bg-gray-100 flex items-center w-fit space-x-2 px-2 ${icons && isRecommended?"":"hidden"}`}>
+                            <SVG
+                                d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
+                                className={"size-3.5"}
+                                {...DATA.SVG_PROPS}
+                            />
+                            <p className="text-[10px] uppercase font-medium py-1 text-gray-600 w-fit">for you</p>
+                        </div>
+                    </div>
                     {/*  title */}
                     <p className={`font-display text-gray-900 hover:text-gray-600 font-semibold ${size === "xs" ? "" : "text-lg"}`}>{size === "xs" ? news?.webTitle.slice(0, 55) + " ..." : news?.webTitle}</p>
                     {/* desc */}
@@ -34,11 +44,12 @@ const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline, Note
 
 
                     {/* bottom section */}
-                    <div className="flex justify-between items-center">
+                    <div className={`flex justify-between items-center ${icons?"w-215":""}`}>
 
                         {/* source and date */}
                         <div className={`flex justify-between items-center text-xs space-x-7 ${size === "xs" ? "flex-col space-x-0 items-start space-y-1" : ""}`}>
-                            <p className="text-xs text-gray-400">{news?.fields?.byline?.slice(0, 14)} {news?.fields?.byline?.length > 14 ? "..." : ""}
+                            <p className="text-xs text-gray-400">
+                                {news?.fields?.byline}
                             </p>
                             <p className="text-gray-400">
                                 {new Date(news?.webPublicationDate).toLocaleDateString("en-IN", {

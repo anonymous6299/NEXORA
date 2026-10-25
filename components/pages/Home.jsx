@@ -9,12 +9,18 @@ import Pagination from "../ui/Pagination"
 import Context from "../../context/ContextInit"
 import checkAvailability from "../logic/CheckAvailbility"
 import { fetchNotes } from "../logic/Notes"
+import { getTopCategory } from "../logic/Recommendations"
 
 
 // latest news
 const LatestNews = ({ ARTICLES }) => {
     // context consumption
     const { RL_ARTICLES, OFFLINE_ARTICLES } = useContext(Context);
+    const [RecommendedCategory, setRecommendedCategory] = useState("")
+    useEffect(() => {
+        setRecommendedCategory(getTopCategory(JSON.parse(localStorage.getItem("recommendations_data"))))
+    }, [])
+    
 
     return (
         <div className="w-full">
@@ -29,11 +35,12 @@ const LatestNews = ({ ARTICLES }) => {
                         return <NewsCard
                             news={ele}
                             key={pos}
-                            isLast={((pos+1)%5===0)||(pos + 1 === ARTICLES.length)}
+                            isLast={((pos + 1) % 5 === 0) || (pos + 1 === ARTICLES.length)}
                             icons={true}
                             isReadLater={checkAvailability(RL_ARTICLES, ele.id)}
                             isAvailOffline={checkAvailability(OFFLINE_ARTICLES, ele.id)}
                             NotesPresent={fetchNotes(ele.id).length !== 0}
+                            isRecommended={RecommendedCategory===ele.sectionName.toLowerCase()}
                         />
                     })
                 }
@@ -52,6 +59,7 @@ const LatestNews = ({ ARTICLES }) => {
 // recommended news
 const RecommendedNews = ({ ARTICLES }) => {
     const { RL_ARTICLES, OFFLINE_ARTICLES } = useContext(Context);
+
     return (
         <div className="w-1/2">
             <CommonHeader
@@ -102,19 +110,21 @@ const Home = () => {
             {/* top filters section */}
             <HomeHeader />
 
-            {/* middle section */}
-            <div className="flex justify-between items-start space-x-20 border-b border-gray-200 min-h-135">
-                <LatestNews ARTICLES={ThisArticles} />
-                <RecommendedNews ARTICLES={DATA.news.response.results.slice(0,6)} />
-            </div>
+            <div className="px-20">
+                {/* middle section */}
+                <div className="flex justify-between items-start space-x-20 border-b border-gray-200 min-h-135">
+                    <LatestNews ARTICLES={ThisArticles} />
+                    {/* <RecommendedNews ARTICLES={DATA.news.response.results.slice(0, 6)} /> */}
+                </div>
 
-            {/* bottom pagination */}
-            <Pagination
-                display={true}
-                ArtLen={DATA.news.response.results.length}
-                CurrentPgtn={CurrentPagination}
-                setCurrentPgtn={setCurrentPagination}
-            />
+                {/* bottom pagination */}
+                <Pagination
+                    display={true}
+                    ArtLen={DATA.news.response.results.length}
+                    CurrentPgtn={CurrentPagination}
+                    setCurrentPgtn={setCurrentPagination}
+                />
+            </div>
         </div>
     )
 }
