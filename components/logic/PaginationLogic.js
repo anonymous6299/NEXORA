@@ -9,6 +9,14 @@ const NotesPagination = (SetState, NavType) => {
 
 }
 
+const SlicingLogic = (changeFactor,DATA,setState,CurrentPagination) => {
+    const change = changeFactor * CurrentPagination;
+    if ((changeFactor + change) > DATA.length) {
+        setState(DATA.slice(change, DATA.length))
+    } else {
+        setState(DATA.slice(0 + change, changeFactor + change))
+    }
+}
 
 
-export { NotesPagination }
+export { NotesPagination,SlicingLogic }

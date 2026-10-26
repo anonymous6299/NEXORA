@@ -7,13 +7,13 @@ import Context from "../../context/ContextInit";
 import { IncreaseData } from "../logic/Recommendations";
 
 // news card
-const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline, NotesPresent,isRecommended }) => {
+const NewsCard = ({className, icons, news, isLast, size, isReadLater, isAvailOffline, NotesPresent,isRecommended }) => {
     // hook init
     const nav = useNavigate();
     const { setCurrentArtcle } = useContext(Context);
     return (
         <>
-            <div className={`flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); IncreaseData(news.sectionName.toLowerCase()) }}>
+            <div className={`${className} flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); IncreaseData(news.sectionName.toLowerCase()) }}>
 
 
                 {/* image  */}
@@ -85,7 +85,7 @@ const NewsCard = ({ icons, news, isLast, size, isReadLater, isAvailOffline, Note
                     </div>
                 </div>
             </div>
-            <hr className={isLast || size === "s" ? "hidden" : `border border-gray-200 ${size === "xs" ? "my-4" : "my-7"}`} />
+            <hr className={isLast || size === "s" ? "hidden" : `border-t border-gray-200 ${size === "xs" ? "my-4" : "my-7"}`} />
         </>
     )
 }

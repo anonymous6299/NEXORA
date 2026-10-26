@@ -10,6 +10,7 @@ import Context from "../../context/ContextInit"
 import checkAvailability from "../logic/CheckAvailbility"
 import { fetchNotes } from "../logic/Notes"
 import { getTopCategory } from "../logic/Recommendations"
+import { SlicingLogic } from "../logic/PaginationLogic"
 
 
 // latest news
@@ -20,7 +21,7 @@ const LatestNews = ({ ARTICLES }) => {
     useEffect(() => {
         setRecommendedCategory(getTopCategory(JSON.parse(localStorage.getItem("recommendations_data"))))
     }, [])
-    
+
 
     return (
         <div className="w-full">
@@ -40,7 +41,7 @@ const LatestNews = ({ ARTICLES }) => {
                             isReadLater={checkAvailability(RL_ARTICLES, ele.id)}
                             isAvailOffline={checkAvailability(OFFLINE_ARTICLES, ele.id)}
                             NotesPresent={fetchNotes(ele.id).length !== 0}
-                            isRecommended={RecommendedCategory===ele.sectionName.toLowerCase()}
+                            isRecommended={RecommendedCategory === ele.sectionName.toLowerCase()}
                         />
                     })
                 }
@@ -97,12 +98,7 @@ const Home = () => {
     const [ThisArticles, setThisArticles] = useState(DATA.news.response.results.slice(0, 5));
 
     useEffect(() => {
-        const change = 5 * CurrentPagination;
-        if ((5 + change) > DATA.news.response.results.length) {
-            setThisArticles(DATA.news.response.results.slice(change, DATA.news.response.results.length))
-        } else {
-            setThisArticles(DATA.news.response.results.slice(0 + change, 5 + change))
-        }
+        SlicingLogic(5, DATA.news.response.results, setThisArticles, CurrentPagination)
     }, [CurrentPagination])
 
     return (
@@ -123,6 +119,7 @@ const Home = () => {
                     ArtLen={DATA.news.response.results.length}
                     CurrentPgtn={CurrentPagination}
                     setCurrentPgtn={setCurrentPagination}
+                    changeFactor={5}
                 />
             </div>
         </div>

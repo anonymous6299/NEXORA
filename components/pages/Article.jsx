@@ -246,11 +246,17 @@ const Article = () => {
     const fetchArticle = async () => {
         try {
             setArtIsLoading(true)
-            let resp = await fetch(`https://content.guardianapis.com/${id}?api-key=${import.meta.env.VITE_API_KEY_GUARDIAN}&show-fields=thumbnail,byline,body`);
-            resp = await resp.json();
-            setArticle({ article: resp.response.content, notes: fetchNotes(resp.response.content.id) });
-            setIsReadLater(checkAvailability(RL_ARTICLES, id));
-            setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
+            if (checkAvailability(OFFLINE_ARTICLES, id)) {
+                setArticle({ article: JSON.parse(localStorage.getItem("offline_articles_full")).find(ele=>ele.id===id), notes: fetchNotes(id) });
+                setIsReadLater(checkAvailability(RL_ARTICLES, id));
+                setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
+            } else {
+                let resp = await fetch(`https://content.guardianapis.com/${id}?api-key=${import.meta.env.VITE_API_KEY_GUARDIAN}&show-fields=thumbnail,byline,body`);
+                resp = await resp.json();
+                setArticle({ article: resp.response.content, notes: fetchNotes(resp.response.content.id) });
+                setIsReadLater(checkAvailability(RL_ARTICLES, id));
+                setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
+            }
             setArtIsLoading(false);
         } catch (error) {
             setArtIsLoading(false)

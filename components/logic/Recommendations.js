@@ -17,14 +17,9 @@ const IncreaseData = (category) => {
 
 
 const getTopCategory = data => {
-    const topCategories = [...(data || [])]
-        .sort((a, b) => b.visits - a.visits)
-        .slice(0, 6)
-        .map(ele => ele.category);
+    const topCategory = data.sort((a, b) => b.visits - a.visits)[0]
 
-    return topCategories.length
-        ? topCategories[Math.floor(Math.random() * topCategories.length)]
-        : "";
+    return topCategory?topCategory.category:""
 };
 
 export { IncreaseData, getTopCategory }
