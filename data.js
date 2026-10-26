@@ -527,7 +527,20 @@ const DATA = {
       "source repository": "github.com/anonymous6299/NEXORA",
       "description": "Project source code and documentation"
     }
-  ]
+  ],
+  filters: {
+    topics: [
+      "Select","World", "Politics", "Business", "Technology", "Science",
+      "Environment", "Sport", "Culture", "Education", "Health"
+    ],
+    country: [
+      "Country","India", "US", "UK", "Australia", "China",
+      "Russia", "Ukraine", "Japan", "Germany", "France"
+    ],
+    languages: [
+      "Lang","English", "Spanish", "German", "French", "Arabic"
+    ]
+  }
 }
 const initNotes = (data) => {
   const resp = data.map(ele => ({ ...ele, notes: [] }))

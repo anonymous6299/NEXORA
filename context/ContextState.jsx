@@ -7,6 +7,11 @@ import AvailOffline from "../components/logic/AvailOffline";
 const ContextState = ({ children }) => {
     // https://content.guardianapis.com/search?api-key=KEY_HERE&show-fields=trailText,thumbnail,byline
 
+
+    // filters:
+    // https://content.guardianapis.com/search?api-key=key&show-fields=trailText,thumbnail,byline&section=sport&lang=en&q=india&from-date=2026-01-01&to-date=2026-10-25
+
+
     // fn to check if articles exists in local storage or not
     const CheckArticles = (key) => {
         if (!(localStorage.getItem(key))) {
@@ -34,6 +39,44 @@ const ContextState = ({ children }) => {
 
     // state for storing recommended articles
     const [RecommendedArticles, setRecommendedArticles] = useState([]);
+
+    // state for articles on home
+    const [HomePgArt, setHomePgArt] = useState([]);
+
+    // state for filters
+    const [Filters, setFilters] = useState({
+        topic: "Select",
+        date: { type: "From/To", value: "" },
+        country: "Country",
+        language: "Lang",
+    })
+
+    // state for checking filters empty or not
+    const [FiltersEmpty, setFiltersEmpty] = useState(true)
+    const ResetFilters = () => {
+        setFilters({
+            topic: "Select",
+            date: { type: "From/To", value: "" },
+            country: "Country",
+            language: "Lang",
+        })
+    }
+    const FiltersToString = () => {
+        let QueryString=""
+        if (Filters.topic!=="Select") {
+            QueryString+="&section="+Filters.topic
+        }
+        if (Filters.date.type!=="From/To"&&Filters.date.value!=="") {
+            QueryString+="&"+ Filters.date.type+"-date="+Filters.date.value
+        }
+        if (Filters.country!=="Country") {
+            QueryString+="&q="+Filters.country
+        }
+        if (Filters.language!=="Lang") {
+            QueryString+="&lang="+Filters.language
+        }
+        return QueryString
+    }
     // tasks to be performed on very first render
     useEffect(() => {
         // check articles
@@ -48,22 +91,38 @@ const ContextState = ({ children }) => {
         set_RL_ARTICLES(JSON.parse(localStorage.getItem("rl_articles")));
         set_OFFLINE_ARTICLES(JSON.parse(localStorage.getItem("offline_articles")));
         set_NOTES_ARTICLES(JSON.parse(localStorage.getItem("notes")));
-    }, [])
 
+        // fetch and set articles for home page
+    }, [])
+    useEffect(() => {
+        const { topic, date, country, language } = Filters
+        const EmptyCondition = topic === "Select" && country === "Country" && language === "Lang" && (date.type === "From/To" || date.value === "");
+
+        setFiltersEmpty(EmptyCondition)
+        if (!EmptyCondition) {
+            // fetch with filters and set the resp on home page
+        }
+
+    }, [Filters])
+    
     return (
         <Context.Provider value={{
             RL_ARTICLES,
             OFFLINE_ARTICLES,
             NOTES_ARTICLES,
             CurrentArtcle,
-            RecommendedArticles, 
+            RecommendedArticles,
+            Filters,
+            setFilters,
             setRecommendedArticles,
             set_RL_ARTICLES,
             set_OFFLINE_ARTICLES,
             set_NOTES_ARTICLES,
             setCurrentArtcle,
             initiateRL,
-            initiateSO
+            initiateSO,
+            ResetFilters,
+            FiltersEmpty
         }}>
             {children}
         </Context.Provider>
