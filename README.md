@@ -28,7 +28,7 @@ Configure your FreeNewsAPI and OpenRouter API keys before running the applicatio
 - **Enrollment No.:** 02615612723
 - **Course:** B.Tech – CST
 - **Semester:** 7th
-- **College:** ADGIPS (aff. with GGSIPU)
+- **University:** GGSIPU
 
 ## Future Scope
 Reading analytics, timed reading challenges, leaderboards and a personalized dashboard.

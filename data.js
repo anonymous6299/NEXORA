@@ -500,7 +500,7 @@ const DATA = {
     { "branch": "Computer Science & Technology" },
     { "semester": "VII Semester" },
     { "academic session": "2026 — 2027" },
-    { "institution": "ADGIPS / GGSIPU" },
+    { "university": "GGSIPU" },
     { "project title": "NEXORA — Personalized Information Discovery & Reading Platform" },
   ],
 
