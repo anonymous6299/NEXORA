@@ -539,12 +539,8 @@ const DATA = {
     ],
     languages: [
       "Lang","English", "Spanish", "German", "French", "Arabic"
-    ]
+    ],
+    langISO:["Lang","en","es","de","fr","ar"]
   }
-}
-const initNotes = (data) => {
-  const resp = data.map(ele => ({ ...ele, notes: [] }))
-
-  return resp
 }
 export default DATA

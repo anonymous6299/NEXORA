@@ -8,7 +8,12 @@ import Context from "../../context/ContextInit";
 const HomeHeader = () => {
     // dropdown display
     const [DropdownDisplay, setDropdownDisplay] = useState(false);
-    const { Filters, setFilters, ResetFilters, FiltersEmpty } = useContext(Context);
+    const { Filters, setFilters, ResetFilters, FiltersEmpty, ApplyFilters } = useContext(Context);
+
+    const fetchByFilters = () => {
+        ApplyFilters()
+    }
+
     return (
         <div className=" border-b border-gray-100 py-5 mb-5 flex justify-between items-start">
             {/* filters */}
@@ -74,10 +79,12 @@ const HomeHeader = () => {
                     {/* clear/apply cta */}
                     <div className="flex items-center justify-between">
                         <p className="text-gray-400 hover:text-gray-700 cursor-pointer text-xs transition-colors" onClick={ResetFilters}>Clear filters</p>
-                        <button className="bg-gray-800 hover:bg-black text-white p-2 text-sm cursor-pointer px-3 py-1.5">Apply</button>
+                        <button className="bg-gray-800 hover:bg-black text-white p-2 text-sm cursor-pointer px-3 py-1.5" onClick={fetchByFilters}>Apply</button>
                     </div>
                     <hr className="border-t border-gray-200" />
-                    <button className="transition-colors w-full px-3 py-2 flex justify-center items-center space-x-3 bg-gray-100 hover:bg-gray-200 cursor-pointer text-gray-600 hover:text-black" onClick={() => { localStorage.setItem("recommendations_data", JSON.stringify([])) }}>
+                    <button 
+                    className="transition-colors w-full px-3 py-2 flex justify-center items-center space-x-3 bg-gray-100 hover:bg-gray-200 cursor-pointer text-gray-600 hover:text-black" 
+                    onClick={() => { localStorage.setItem("recommendations_data", JSON.stringify([])) }}>
                         <SVG
                             className={"size-4"}
                             d={"M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3"}
@@ -100,7 +107,7 @@ const HomeHeader = () => {
                     className=" border border-gray-200 focus:border-gray-400 px-2.5 py-1.5 text-sm cursor-pointer">
                     {
                         DATA.filters.languages.map((ele, pos) => {
-                            return <option disabled={pos === 0} value={ele} key={pos}>{ele}</option>
+                            return <option disabled={pos === 0} value={DATA.filters.langISO[pos]} key={pos}>{ele}</option>
                         })
                     }
                 </select>

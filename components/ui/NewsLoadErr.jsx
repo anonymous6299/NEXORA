@@ -4,8 +4,8 @@ import DATA from "../../data"
 
 
 // displayed when news in any section is loading
-const NewsCardLoading = ({ n }) => {
-    return <div className="space-y-5">
+const NewsCardLoading = ({ n, display }) => {
+    return <div className={`space-y-5 ${display?"":"hidden"}`}>
         {
             Array.from({ length: n }).map((ele, pos) => {
                 return <div className="space-y-2.5 border-b border-gray-100 pb-5 animate-pulse" key={pos}>
@@ -50,4 +50,4 @@ const RecommendationError = () => {
 
 
 
-export { NewsCardLoading, NewsError, RecommendationError }
+export { NewsCardLoading, NewsError }

@@ -2,14 +2,14 @@ import { useEffect, useState } from "react"
 import Context from "./ContextInit"
 import ReadLater from "../components/logic/ReadLater";
 import AvailOffline from "../components/logic/AvailOffline";
-
+import { FiltersToString, FetchByFilters } from '../components/logic/Filters'
 
 const ContextState = ({ children }) => {
     // https://content.guardianapis.com/search?api-key=KEY_HERE&show-fields=trailText,thumbnail,byline
 
 
     // filters:
-    // https://content.guardianapis.com/search?api-key=key&show-fields=trailText,thumbnail,byline&section=sport&lang=en&q=india&from-date=2026-01-01&to-date=2026-10-25
+    // https://content.guardianapis.com/search?api-key=key&show-fields=trailText,thumbnail,byline&section=sport&lang=en&q=india&from-date=2026-01-01&to-date=2026-10-25&page-size=100
 
 
     // fn to check if articles exists in local storage or not
@@ -41,7 +41,7 @@ const ContextState = ({ children }) => {
     const [RecommendedArticles, setRecommendedArticles] = useState([]);
 
     // state for articles on home
-    const [HomePgArt, setHomePgArt] = useState([]);
+    const [HomePgArt, setHomePgArt] = useState({ error: false, loading: false, data: [] });
 
     // state for filters
     const [Filters, setFilters] = useState({
@@ -60,23 +60,34 @@ const ContextState = ({ children }) => {
             country: "Country",
             language: "Lang",
         })
+
+        // fetch again by removing all the filters in url
     }
-    const FiltersToString = () => {
-        let QueryString=""
-        if (Filters.topic!=="Select") {
-            QueryString+="&section="+Filters.topic
+    const ApplyFilters = async () => {
+        const { topic, date, country, language } = Filters
+        const EmptyCondition = topic === "Select" && country === "Country" && language === "Lang" && (date.type === "From/To" || date.value === "");
+
+        setFiltersEmpty(EmptyCondition)
+        if (!EmptyCondition) {
+            try {
+                setHomePgArt({error:false,loading:true,data:[]})
+                const filters = FiltersToString(Filters);
+                const resp = await FetchByFilters(import.meta.env.VITE_API_KEY_GUARDIAN, filters)
+                setHomePgArt({error:false,loading:false,data:resp})
+            } catch (error) {
+                setHomePgArt({error:true,loading:false,data:[]})
+            }
         }
-        if (Filters.date.type!=="From/To"&&Filters.date.value!=="") {
-            QueryString+="&"+ Filters.date.type+"-date="+Filters.date.value
-        }
-        if (Filters.country!=="Country") {
-            QueryString+="&q="+Filters.country
-        }
-        if (Filters.language!=="Lang") {
-            QueryString+="&lang="+Filters.language
-        }
-        return QueryString
     }
+
+    useEffect(() => {
+        const { topic, date, country, language } = Filters
+        const EmptyCondition = topic === "Select" && country === "Country" && language === "Lang" && (date.type === "From/To" || date.value === "");
+
+        setFiltersEmpty(EmptyCondition)
+    }, [Filters])
+
+
     // tasks to be performed on very first render
     useEffect(() => {
         // check articles
@@ -94,17 +105,7 @@ const ContextState = ({ children }) => {
 
         // fetch and set articles for home page
     }, [])
-    useEffect(() => {
-        const { topic, date, country, language } = Filters
-        const EmptyCondition = topic === "Select" && country === "Country" && language === "Lang" && (date.type === "From/To" || date.value === "");
 
-        setFiltersEmpty(EmptyCondition)
-        if (!EmptyCondition) {
-            // fetch with filters and set the resp on home page
-        }
-
-    }, [Filters])
-    
     return (
         <Context.Provider value={{
             RL_ARTICLES,
@@ -113,6 +114,8 @@ const ContextState = ({ children }) => {
             CurrentArtcle,
             RecommendedArticles,
             Filters,
+            HomePgArt,
+            setHomePgArt,
             setFilters,
             setRecommendedArticles,
             set_RL_ARTICLES,
@@ -122,7 +125,8 @@ const ContextState = ({ children }) => {
             initiateRL,
             initiateSO,
             ResetFilters,
-            FiltersEmpty
+            FiltersEmpty,
+            ApplyFilters
         }}>
             {children}
         </Context.Provider>

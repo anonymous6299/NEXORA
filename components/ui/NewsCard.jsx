@@ -13,7 +13,7 @@ const NewsCard = ({className, icons, news, isLast, size, isReadLater, isAvailOff
     const { setCurrentArtcle } = useContext(Context);
     return (
         <>
-            <div className={`${className} flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); IncreaseData(news.sectionName.toLowerCase()) }}>
+            <div className={`${className??""} flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); IncreaseData(news.sectionName.toLowerCase()) }}>
 
 
                 {/* image  */}
