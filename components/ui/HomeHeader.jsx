@@ -31,7 +31,7 @@ const HomeHeader = () => {
 
 
                 {/* dropdown of filters button*/}
-                <div className={`border border-gray-200 shadow-lg mt-3 p-4 space-y-3 ${!DropdownDisplay ? "hidden" : "absolute bg-white"}`}>
+                <div className={`border border-gray-200 shadow-lg mt-3 p-4 z-50 space-y-3 ${!DropdownDisplay ? "hidden" : "absolute bg-white"}`}>
                     {/* topic */}
                     <div className="space-y-1">
                         <p className="text-xs font-medium uppercase text-gray-500">topic</p>

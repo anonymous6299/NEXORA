@@ -13,6 +13,7 @@ import checkAvailability from '../logic/CheckAvailbility'
 import GenerateAISummary from '../logic/AISummary'
 import { addNotesLS, fetchNotes, remNotesLS } from '../logic/Notes'
 import ArticleNote from '../ui/ArticleNote'
+import { FetchItem } from '../logic/FetchArticles'
 // news content component
 const NewsContent = ({
     ARTICLE,
@@ -251,9 +252,8 @@ const Article = () => {
                 setIsReadLater(checkAvailability(RL_ARTICLES, id));
                 setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
             } else {
-                let resp = await fetch(`https://content.guardianapis.com/${id}?api-key=${import.meta.env.VITE_API_KEY_GUARDIAN}&show-fields=thumbnail,byline,body`);
-                resp = await resp.json();
-                setArticle({ article: resp.response.content, notes: fetchNotes(resp.response.content.id) });
+                const resp = await FetchItem(id,import.meta.env.VITE_API_KEY_GUARDIAN)
+                setArticle({ article: resp, notes: fetchNotes(resp.id) });
                 setIsReadLater(checkAvailability(RL_ARTICLES, id));
                 setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
             }

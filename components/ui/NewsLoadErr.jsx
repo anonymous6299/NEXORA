@@ -5,13 +5,13 @@ import DATA from "../../data"
 
 // displayed when news in any section is loading
 const NewsCardLoading = ({ n, display }) => {
-    return <div className={`space-y-5 ${display?"":"hidden"}`}>
+    return <div className={`space-y-5 my-10 ${display?"":"hidden"}`}>
         {
             Array.from({ length: n }).map((ele, pos) => {
                 return <div className="space-y-2.5 border-b border-gray-100 pb-5 animate-pulse" key={pos}>
                     {
                         ["w-20", "w-full", "w-3/4", "w-1/3"].map((ele, pos) => {
-                            return <div className={`bg-gray-100 h-4 ${ele}`} key={pos}></div>
+                            return <div className={`bg-gray-200 h-4 ${ele}`} key={pos}></div>
                         })
                     }
                 </div>

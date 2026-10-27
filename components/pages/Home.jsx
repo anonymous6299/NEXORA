@@ -11,24 +11,28 @@ import checkAvailability from "../logic/CheckAvailbility"
 import { fetchNotes } from "../logic/Notes"
 import { getTopCategory } from "../logic/Recommendations"
 import { SlicingLogic } from "../logic/PaginationLogic"
+import { FetchWithoutFilters } from "../logic/FetchArticles"
 
 
 // latest news
 const LatestNews = ({ ARTICLES }) => {
     // context consumption
-    const { RL_ARTICLES, OFFLINE_ARTICLES, HomePgArt, setHomePgArt, FiltersEmpty,ApplyFilters } = useContext(Context);
+    const { RL_ARTICLES, OFFLINE_ARTICLES, HomePgArt, setHomePgArt, FiltersEmpty, ApplyFilters } = useContext(Context);
     const [RecommendedCategory, setRecommendedCategory] = useState("")
     useEffect(() => {
         setRecommendedCategory(getTopCategory(JSON.parse(localStorage.getItem("recommendations_data"))))
     }, [])
+
+
     const retry = () => {
+        setHomePgArt(prev => ({ ...prev, loading: true, error: false }))
         if (FiltersEmpty) {
-            // normal fetch
+            FetchWithoutFilters(import.meta.env.VITE_API_KEY_GUARDIAN)
+                .then(resp => setHomePgArt({ loading: false, error: false, data: resp }))
+                .catch(err => setHomePgArt({ loading: false, error: true, data: [] }))
         } else {
-            setHomePgArt(prev=>({...prev,loading:true,error:false}))
             ApplyFilters()
         }
-        // if filters: fetch again by filters else normal fetch
     }
 
     return (
@@ -36,9 +40,8 @@ const LatestNews = ({ ARTICLES }) => {
             <CommonHeader
                 title={"latest news"}
                 hr={false}
-                length={DATA.news.response.results.length}
             />
-            <div className="mt-5">
+            <div className={`mt-5 ${HomePgArt.loading||HomePgArt.error?"hidden":""}`}>
                 {
                     ARTICLES.map((ele, pos) => {
                         return <NewsCard
@@ -108,11 +111,28 @@ const RecommendedNews = ({ ARTICLES }) => {
 
 const Home = () => {
     const [CurrentPagination, setCurrentPagination] = useState(0);
-    const [ThisArticles, setThisArticles] = useState(DATA.news.response.results.slice(0, 5));
-    const { HomePgArt } = useContext(Context);
+    const { HomePgArt, setHomePgArt } = useContext(Context);
+    const [ThisArticles, setThisArticles] = useState([]);
+
     useEffect(() => {
-        SlicingLogic(5, DATA.news.response.results, setThisArticles, CurrentPagination)
+        if (HomePgArt.data.length === 0) {
+            setHomePgArt(prev=>({...prev, loading: true, error: false }))
+            FetchWithoutFilters(import.meta.env.VITE_API_KEY_GUARDIAN)
+                .then(resp => setHomePgArt({ loading: false, error: false, data: resp }))
+                .catch(err => setHomePgArt(prev => ({ ...prev, loading: false, error: true })))
+        }
+    }, [])
+
+    useEffect(() => {
+        SlicingLogic(5, HomePgArt.data, setThisArticles, CurrentPagination)
     }, [CurrentPagination])
+
+    useEffect(() => {
+        if (HomePgArt.data.length!==0) {
+            setThisArticles(HomePgArt.data.slice(0, 5))
+        }
+    }, [HomePgArt.data])
+    
 
     return (
         <div className="px-40">
@@ -121,14 +141,14 @@ const Home = () => {
 
             <div className="px-20">
                 {/* middle section */}
-                <div className="flex justify-between items-start space-x-20 min-h-135">
+                {/* <div className="flex justify-between items-start space-x-20 min-h-135"> */}
                     <LatestNews ARTICLES={ThisArticles} />
                     {/* <RecommendedNews ARTICLES={DATA.news.response.results.slice(0, 6)} /> */}
-                </div>
+                {/* </div> */}
                 {/* bottom pagination */}
                 <Pagination
                     display={!(HomePgArt.error) && !(HomePgArt.loading)}
-                    ArtLen={DATA.news.response.results.length}
+                    ArtLen={HomePgArt.data.length}
                     CurrentPgtn={CurrentPagination}
                     setCurrentPgtn={setCurrentPagination}
                     changeFactor={5}

@@ -1,0 +1,5 @@
+schema: 1
+id: 01M5YGKJSED2PCYYFHA3AW65QS
+name: get articles
+method: GET
+url: https://content.guardianapis.com/search?api-key=1b21c345-a54e-4a58-b1f7-c32ae1a86398&show-fields=thumbnail,byline,body&page-size=100&section=politics

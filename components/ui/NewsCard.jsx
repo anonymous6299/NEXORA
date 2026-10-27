@@ -7,19 +7,32 @@ import Context from "../../context/ContextInit";
 import { IncreaseData } from "../logic/Recommendations";
 
 // news card
-const NewsCard = ({className, icons, news, isLast, size, isReadLater, isAvailOffline, NotesPresent,isRecommended }) => {
+const NewsCard = ({ className, icons, news, isLast, size, isReadLater, isAvailOffline, NotesPresent, isRecommended }) => {
     // hook init
     const nav = useNavigate();
     const { setCurrentArtcle } = useContext(Context);
     return (
         <>
-            <div className={`${className??""} flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); IncreaseData(news.sectionName.toLowerCase()) }}>
+            <div className={`${className ?? ""} flex items-start space-x-5 cursor-pointer ${isLast ? size === "xs" ? "mb-4" : "mb-7" : ""}`} onClick={() => { nav(`/article/${news.id}`); setCurrentArtcle(news); IncreaseData(news.sectionName.toLowerCase()) }}>
 
 
                 {/* image  */}
-                <div className={`w-full aspect-3/2 overflow-hidden ${size === "xs" ? "h-22" : ""}`} style={{ maxWidth: size === "s" ? "7.5rem" : size === "xs" ? "7rem" : "10rem" }}>
-                    <img src={news?.fields?.thumbnail} alt="image" className="w-full hover:scale-[1.02] transition-transform duration-300 h-full" />
-                </div>
+                {
+                    news?.fields?.thumbnail ? <div className={`w-full aspect-3/2 overflow-hidden ${size === "xs" ? "h-22" : ""}`} style={{ maxWidth: size === "s" ? "7.5rem" : size === "xs" ? "7rem" : "10rem" }}>
+                        <img src={news?.fields?.thumbnail} alt="image" className="w-full hover:scale-[1.02] transition-transform duration-300 h-full" />
+                    </div> : <div className="border border-gray-200 bg-gray-50 w-full h-full aspect-3/2 text-gray-400 flex flex-col justify-center items-center">
+                        <SVG
+                            className={"size-15"}
+                            d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                            strokeWidth={0.5}
+                            {...DATA.SVG_PROPS}
+                        />
+
+                        <p className="uppercase font-medium tracking-widest text-[10px]">
+                            image not found
+                        </p>
+                    </div>
+                }
 
                 <div className="space-y-1.5 cursor-pointer" >
 
@@ -28,7 +41,7 @@ const NewsCard = ({className, icons, news, isLast, size, isReadLater, isAvailOff
                     <div className="flex items-center space-x-2">
                         <p className="uppercase text-xs font-medium tracking-widest text-gray-400">
                             {news?.sectionName}</p>
-                        <div className={`border-l-2 border-black bg-gray-100 flex items-center w-fit space-x-2 px-2 ${icons && isRecommended?"":"hidden"}`}>
+                        <div className={`border-l-2 border-black bg-gray-100 flex items-center w-fit space-x-2 px-2 ${icons && isRecommended ? "" : "hidden"}`}>
                             <SVG
                                 d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z"
                                 className={"size-3.5"}
@@ -40,11 +53,11 @@ const NewsCard = ({className, icons, news, isLast, size, isReadLater, isAvailOff
                     {/*  title */}
                     <p className={`font-display text-gray-900 hover:text-gray-600 font-semibold ${size === "xs" ? "" : "text-lg"}`}>{size === "xs" ? news?.webTitle.slice(0, 55) + " ..." : news?.webTitle}</p>
                     {/* desc */}
-                    <p className={`text-sm text-gray-500 ${size === "xs" || size === "s" ? "hidden" : ""}`}>{news?.fields?.trailText?.length > 147 ? news?.fields?.trailText?.slice(0, 147) + " ..." : news?.fields?.trailText + "."}</p>
+                    <p className={`text-sm text-gray-500 ${size === "xs" || size === "s" ? "hidden" : ""}`}>{news?.fields?.trailText ? news?.fields?.trailText.length > 147 ? news?.fields?.trailText?.slice(0, 147) + " ..." : news?.fields?.trailText + "." : ""}</p>
 
 
                     {/* bottom section */}
-                    <div className={`flex justify-between items-center ${icons?"w-215":""}`}>
+                    <div className={`flex justify-between items-center ${icons ? "w-215" : ""}`}>
 
                         {/* source and date */}
                         <div className={`flex justify-between items-center text-xs space-x-7 ${size === "xs" ? "flex-col space-x-0 items-start space-y-1" : ""}`}>
@@ -52,9 +65,9 @@ const NewsCard = ({className, icons, news, isLast, size, isReadLater, isAvailOff
                                 {news?.fields?.byline}
                             </p>
                             <p className="text-gray-400">
-                                {new Date(news?.webPublicationDate).toLocaleDateString("en-IN", {
-                                    timeZone: "Asia/Kolkata",
-                                    day: "numeric",
+                                {new Date(news?.webPublicationDate).toLocaleDateString("en-GB", {
+                                    timeZone: "UTC",
+                                    day: "2-digit",
                                     month: "long",
                                     year: "numeric",
                                 })}
@@ -84,7 +97,7 @@ const NewsCard = ({className, icons, news, isLast, size, isReadLater, isAvailOff
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
             <hr className={isLast || size === "s" ? "hidden" : `border-t border-gray-200 ${size === "xs" ? "my-4" : "my-7"}`} />
         </>
     )

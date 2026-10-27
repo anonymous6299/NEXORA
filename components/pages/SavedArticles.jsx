@@ -28,7 +28,7 @@ const ReadLater = ({ ARTICLES }) => {
       <div className="max-w-213 overflow-x-hidden">
         {ARTICLES.length > 0 ? <div className="flex justify-between items-start space-x-20  transition-all duration-500" style={{ marginLeft: Margin + "rem" }}>{
           ARTICLES.map((ele, pos) => {
-            return <div>
+            return <div key={pos}>
               <NewsCard
                 className={"w-213"}
                 icons={false}
@@ -75,7 +75,7 @@ const [CurrentPgtn, setCurrentPgtn] = useState(0);
 
         {ARTICLES.length > 0 ? <div className="flex justify-between items-start space-x-20  transition-all duration-500" style={{ marginLeft: Margin + "rem" }}>{
           ARTICLES.map((ele, pos) => {
-            return <div>
+            return <div key={pos}>
               <NewsCard
                 className={"w-213"}
                 icons={false}

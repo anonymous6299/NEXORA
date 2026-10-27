@@ -3,13 +3,14 @@ import Context from "./ContextInit"
 import ReadLater from "../components/logic/ReadLater";
 import AvailOffline from "../components/logic/AvailOffline";
 import { FiltersToString, FetchByFilters } from '../components/logic/Filters'
+import { FetchWithoutFilters } from "../components/logic/FetchArticles";
 
 const ContextState = ({ children }) => {
-    // https://content.guardianapis.com/search?api-key=KEY_HERE&show-fields=trailText,thumbnail,byline
+    // https://content.guardianapis.com/search?api-key=KEY_HERE&show-fields=trailText,thumbnail,byline&page-size=100
 
 
     // filters:
-    // https://content.guardianapis.com/search?api-key=key&show-fields=trailText,thumbnail,byline&section=sport&lang=en&q=india&from-date=2026-01-01&to-date=2026-10-25&page-size=100
+    // https://content.guardianapis.com/search?api-key=key&show-fields=trailText,thumbnail,byline&section=sport&lang=en&q=india&from-date=2026-01-01&to-date=2026-10-25
 
 
     // fn to check if articles exists in local storage or not
@@ -60,8 +61,10 @@ const ContextState = ({ children }) => {
             country: "Country",
             language: "Lang",
         })
-
-        // fetch again by removing all the filters in url
+        setHomePgArt({ loading: true, error: false, data: [] })
+        FetchWithoutFilters(import.meta.env.VITE_API_KEY_GUARDIAN)
+            .then(resp => setHomePgArt({ loading: false, error: false, data: resp }))
+            .catch(err => setHomePgArt({ loading: false, error: true, data: [] }))
     }
     const ApplyFilters = async () => {
         const { topic, date, country, language } = Filters
@@ -70,12 +73,12 @@ const ContextState = ({ children }) => {
         setFiltersEmpty(EmptyCondition)
         if (!EmptyCondition) {
             try {
-                setHomePgArt({error:false,loading:true,data:[]})
+                setHomePgArt({ error: false, loading: true, data: [] })
                 const filters = FiltersToString(Filters);
                 const resp = await FetchByFilters(import.meta.env.VITE_API_KEY_GUARDIAN, filters)
-                setHomePgArt({error:false,loading:false,data:resp})
+                setHomePgArt({ error: false, loading: false, data: resp })
             } catch (error) {
-                setHomePgArt({error:true,loading:false,data:[]})
+                setHomePgArt({ error: true, loading: false, data: [] })
             }
         }
     }

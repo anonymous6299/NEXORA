@@ -34,7 +34,7 @@ const Pagination = ({ Pg_Type, display, ArtLen, CurrentPgtn, setCurrentPgtn,chan
             <button
                 className={btnClass}
                 // (5 + change)
-                disabled={Pg_Type === "notes" ? CurrentPgtn + 1 === ArtLen : (changeFactor * (CurrentPgtn + 1)) > ArtLen}
+                disabled={Pg_Type === "notes" ? CurrentPgtn + 1 === ArtLen : CurrentPgtn===19}
                 onClick={() => { NotesPagination(setCurrentPgtn, "n") }}>
                 <SVG
                     d={"m8.25 4.5 7.5 7.5-7.5 7.5"}
