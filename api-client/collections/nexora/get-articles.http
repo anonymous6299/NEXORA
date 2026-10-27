@@ -1,5 +1,0 @@
-# api-client generated v1 src=get-articles.req.yml h=0a1bad7a7b1ae9 -- edit the .req.yml, not this file
-### get articles
-# @name get_articles
-# [values of secrets are not written here: define secret_nexora_query_api_key in your environment]
-GET https://content.guardianapis.com/search?api-key={{secret_nexora_query_api_key}}&show-fields=thumbnail,byline,body&page-size=100&section=politics
