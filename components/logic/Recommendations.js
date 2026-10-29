@@ -17,7 +17,7 @@ const IncreaseData = (category) => {
 
 
 const getTopCategory = data => {
-    const topCategory = data.sort((a, b) => b.visits - a.visits)[0]
+    const topCategory = data?.sort((a, b) => b.visits - a.visits)[0]
 
     return topCategory?topCategory.category:""
 };

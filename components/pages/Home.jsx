@@ -20,7 +20,7 @@ const LatestNews = ({ ARTICLES }) => {
     const { RL_ARTICLES, OFFLINE_ARTICLES, HomePgArt, setHomePgArt, FiltersEmpty, ApplyFilters } = useContext(Context);
     const [RecommendedCategory, setRecommendedCategory] = useState("")
     useEffect(() => {
-        setRecommendedCategory(getTopCategory(JSON.parse(localStorage.getItem("recommendations_data"))))
+        setRecommendedCategory(getTopCategory(JSON.parse(localStorage.getItem("recommendations_data"))??[]))
     }, [])
 
 

@@ -10,7 +10,7 @@ const Pagination = ({ Pg_Type, display, ArtLen, CurrentPgtn, setCurrentPgtn,chan
     const btnClass = "p-1.5 border border-gray-200 hover:border-gray-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
 
     return (
-        <div className={`${display ? "flex" : "hidden"} justify-between items-center w-fit my-5 space-x-4 ${className??""}`}>
+        <div className={`${display ? "flex" : "hidden"} justify-between items-center my-5 ${className?className:""}`}>
 
             {/* prev */}
             <button
