@@ -17,8 +17,6 @@ React.js, JavaScript, HTML5, CSS3, Tailwind CSS, Heroicons, FreeNewsAPI, OpenRou
 - [NEXORA - Primary Deployment](https://nexora-orcin-xi.vercel.app/)
 - [NEXORA - Alternative Deployment](https://nexora-anonymous-projects-420743fe.vercel.app/)
 
-Configure your FreeNewsAPI and OpenRouter API keys before running the application.
-
 ## Student Details
 - **Name:** Gaurav Joshi
 - **Enrollment No.:** 02615612723
