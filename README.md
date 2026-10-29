@@ -13,13 +13,9 @@ NEXORA is a web application for discovering, summarizing, saving, and organizing
 ## Tech Stack
 React.js, JavaScript, HTML5, CSS3, Tailwind CSS, Heroicons, FreeNewsAPI, OpenRouter API, Local Storage.
 
-## Installation
-```bash
-git clone https://github.com/anonymous6299/NEXORA
-cd nexora
-npm install
-npm run dev
-```
+## Live Demo
+- [NEXORA - Primary Deployment](https://nexora-orcin-xi.vercel.app/)
+- [NEXORA - Alternative Deployment](https://nexora-anonymous-projects-420743fe.vercel.app/)
 
 Configure your FreeNewsAPI and OpenRouter API keys before running the application.
 
