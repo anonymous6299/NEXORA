@@ -34,7 +34,7 @@ const NewsContent = ({
 
     const imgRef = useRef(null);
     // ai summary state
-    const [AI_SUMMARY, set_AI_SUMMARY] = useState({ text: "", loading: false, dipslay: false })
+    const [AI_SUMMARY, set_AI_SUMMARY] = useState({ text: "", loading: false, dipslay: false, })
 
     const GenerateSummary = async () => {
         imgRef.current?.scrollIntoView({
@@ -47,11 +47,14 @@ const NewsContent = ({
             behavior: "smooth"
         });
         try {
-            set_AI_SUMMARY(prev => ({ ...prev, loading: true, display: true }))
-            const resp = await GenerateAISummary(ARTICLE?.webTitle, ARTICLE?.fields?.body)
-            set_AI_SUMMARY(prev => ({ ...prev, loading: false, text: resp }))
+            if (!navigator.onLine) {
+                set_AI_SUMMARY({loading: false, display: true, text: "Couldn't generate summary. Try again later." })
+            } else {
+                set_AI_SUMMARY(prev => ({ ...prev, loading: true, display: true }))
+                const resp = await GenerateAISummary(ARTICLE?.webTitle, ARTICLE?.fields?.body)
+                set_AI_SUMMARY(prev => ({ ...prev, loading: false, text: resp }))
+            }
         } catch (error) {
-            console.log(error)
             set_AI_SUMMARY(prev => ({ ...prev, loading: false, text: "Couldn't generate summary. Try again later." }))
         }
     }
@@ -248,11 +251,11 @@ const Article = () => {
         try {
             setArtIsLoading(true)
             if (checkAvailability(OFFLINE_ARTICLES, id)) {
-                setArticle({ article: JSON.parse(localStorage.getItem("offline_articles_full")).find(ele=>ele.id===id), notes: fetchNotes(id) });
+                setArticle({ article: JSON.parse(localStorage.getItem("offline_articles_full")).find(ele => ele.id === id), notes: fetchNotes(id) });
                 setIsReadLater(checkAvailability(RL_ARTICLES, id));
                 setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
             } else {
-                const resp = await FetchItem(id,import.meta.env.VITE_API_KEY_GUARDIAN)
+                const resp = await FetchItem(id, import.meta.env.VITE_API_KEY_GUARDIAN)
                 setArticle({ article: resp, notes: fetchNotes(resp.id) });
                 setIsReadLater(checkAvailability(RL_ARTICLES, id));
                 setIsAvailOffline(checkAvailability(OFFLINE_ARTICLES, id));
