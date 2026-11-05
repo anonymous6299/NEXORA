@@ -18,7 +18,7 @@ const NewsCard = ({ className, icons, news, isLast, size, isReadLater, isAvailOf
 
                 {/* image  */}
                 {
-                    news?.fields?.thumbnail ? <div className={`w-full aspect-3/2 overflow-hidden ${size === "xs" ? "h-22" : ""}`} style={{ maxWidth: size === "s" ? "7.5rem" : size === "xs" ? "7rem" : "10rem" }}>
+                    news?.fields?.thumbnail ? <div className={`w-full shrink-0 aspect-3/2 overflow-hidden ${size === "xs" ? "h-22" : ""}`} style={{ maxWidth: size === "s" ? "7.5rem" : size === "xs" ? "7rem" : "10rem" }}>
                         <img src={news?.fields?.thumbnail} alt="image" className="w-full hover:scale-[1.02] transition-transform duration-300 h-full" />
                     </div> : <div className="border border-gray-200 bg-gray-50 w-full h-full aspect-3/2 text-gray-400 flex flex-col justify-center items-center">
                         <SVG
